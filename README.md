@@ -1,4 +1,4 @@
-Udari, [16.06.21 20:30]
+
 Sport Management System
 
 This is our second-year software project(L2).it received from us by Mr. Darmendra Aththanayake in Mutants International Company at Dehiwala. 
