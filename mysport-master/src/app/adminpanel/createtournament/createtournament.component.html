@@ -1,0 +1,70 @@
+<br>
+<a routerLink="/tournament" class="previous round">&#8249; Back</a>
+<div id="tour-page">
+    <div class="form">
+        <form [formGroup]="CreateTournament" (ngSubmit)="TournamentSubmit()">
+            <h3>Enter Tournament details</h3><br>
+            <div class="form-group">
+                <label for="TournamentName">Tournament Name</label>
+                <input [class.is-invalid]="CreateTournament.get('TournamentName').invalid && CreateTournament.get('TournamentName').touched" formControlName="TournamentName" type="text" class="form-control form-control-lg" id="TournamentName" required placeholder="Team ABC">
+                <small [class.d-none]="CreateTournament.get('TournamentName').valid || CreateTournament.get('TournamentName').untouched" class="text-danger">Tournament Name required</small>
+            </div><br>
+
+            <div class="form-group">
+                <label for="Sport">Sport</label>
+                <select [class.is-invalid]="CreateTournament.get('Sport').invalid && CreateTournament.get('Sport').touched" formControlName="Sport" class="form-control" id="exampleFormControlSelect1">
+                    <option class="option" *ngFor="let s of Sports" [value]=s.sportId>{{s.sportName}}</option>
+                </select>
+                <small [class.d-none]="CreateTournament.get('Sport').valid || CreateTournament.get('Sport').untouched" class="text-danger">Sport Required</small>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <div class="form-check">
+                        <input class="form-check-input big-checkbox" type="checkbox" value="" id="flexCheckDefault1" formControlName="under15male">&nbsp;&nbsp;
+                        <label class="form-check-label" for="flexCheckDefault1">
+                        Under 15 male
+                    </label>
+                    </div><br>
+                    <div class="form-check">
+                        <input class="form-check-input big-checkbox" type="checkbox" value="" id="flexCheckDefault2" formControlName="under17male">&nbsp;&nbsp;
+                        <label class="form-check-label" for="flexCheckDefault2">
+                        Under 17 male
+                    </label>
+                    </div><br>
+                    <div class="form-check">
+                        <input class="form-check-input big-checkbox" type="checkbox" value="" id="flexCheckDefault3" formControlName="under19male">&nbsp;&nbsp;
+                        <label class="form-check-label" for="flexCheckDefault3">
+                        Under 19 male
+                    </label>
+                    </div><br>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <div class="form-check">
+                        <input class="form-check-input big-checkbox" type="checkbox" value="" id="flexCheckDefault4" formControlName="under15female">&nbsp;&nbsp;
+                        <label class="form-check-label" for="flexCheckDefault4">
+                        Under 15 female
+                    </label>
+                    </div><br>
+                    <div class="form-check">
+                        <input class="form-check-input big-checkbox" type="checkbox" value="" id="flexCheckDefault5" formControlName="under17female">&nbsp;&nbsp;
+                        <label class="form-check-label" for="flexCheckDefault5">
+                        Under 17 female
+                    </label>
+                    </div><br>
+                    <div class="form-check">
+                        <input class="form-check-input big-checkbox" type="checkbox" value="" id="flexCheckDefault6" formControlName="under19female">&nbsp;&nbsp;
+                        <label class="form-check-label" for="flexCheckDefault6">
+                        Under 19 female
+                    </label>
+                    </div><br>
+                </div>
+            </div>
+
+            <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
+            <button [disabled]="CreateTournament.invalid || isFill()" type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+<br>

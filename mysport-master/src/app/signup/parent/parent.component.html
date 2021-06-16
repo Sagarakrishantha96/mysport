@@ -1,0 +1,55 @@
+<div id="login-page">
+    <div class="form">
+        <form [formGroup]="parentRegistration" (ngSubmit)="parentSubmit()">
+            <h3>Enter your details</h3><br>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="firstNameParent">First Name</label>
+                    <input [class.is-invalid]="firstNameParent.invalid && firstNameParent.touched  " formControlName="firstNameParent" type="text" class="form-control form-control-lg" id="firstNameParent" required placeholder="First name">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="secondNameParent">Last Name</label>
+                    <input [class.is-invalid]="secondNameParent.invalid && secondNameParent.touched" formControlName="secondNameParent" type="text" class="form-control form-control-lg" id="secondNameParent" required placeholder="Last name">
+                </div>
+
+                <div *ngIf="(firstNameParent.touched && firstNameParent.invalid) || secondNameParent.invalid && secondNameParent.touched">
+                    <small class="text-danger">First name and last name reuired and must contain more than 3
+            charactors<br></small>
+                </div>
+
+            </div><br>
+
+            <div class="form-group">
+                <label for="parent">guardian</label>
+                <select [class.is-invalid]="parentRegistration.get('parentSelect').invalid && parentRegistration.get('parentSelect').touched" formControlName="parentSelect" class="form-control" id="exampleFormControlSelect1">
+          <option>Mother</option>
+          <option>Father</option>
+          <option>Other</option>
+        </select>
+                <small [class.d-none]="parentRegistration.get('parentSelect').valid || parentRegistration.get('parentSelect').untouched" class="text-danger">Required</small>
+            </div><br>
+
+            <div class="form-group">
+                <label for="AddressParent">Address</label>
+                <input [class.is-invalid]="parentRegistration.get('AddressParent').invalid && parentRegistration.get('AddressParent').touched" formControlName="AddressParent" type="text" class="form-control form-control-lg" id="AddressParent" required placeholder="1234 Main St">
+                <small [class.d-none]="parentRegistration.get('AddressParent').valid || parentRegistration.get('AddressParent').untouched" class="text-danger">Address required</small>
+            </div><br>
+
+
+            <div class="form-group">
+                <label for="teleNoParent">Telephone Number</label>
+                <input [class.is-invalid]="teleNoParent.invalid && teleNoParent.touched" formControlName="teleNoParent" type="tel" class="form-control form-control-lg" id="teleNoParent" placeholder="+94 71 2345678" required>
+
+                <div *ngIf="teleNoParent.invalid && teleNoParent.touched">
+                    <small *ngIf="teleNoParent.errors?.required" class="text-danger">Telephone number required</small>
+                    <small *ngIf="teleNoParent.errors?.pattern" class="text-danger">Invalid telephone number</small>
+                </div>
+            </div><br>
+
+            <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
+            <button [disabled]="parentRegistration.invalid" type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>

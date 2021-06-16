@@ -1,0 +1,224 @@
+<div style="width: 100%; overflow: hidden;">
+    <div class="Left"><br>
+        <a (click)="back()" class="previous round">&#8249; Back</a>
+        <div class="Team">
+            {{FixtureDetails[0]?.instituteName}} vs {{FixtureDetails[1]?.instituteName}}
+        </div>
+        <div class="menu" style="padding-top: 2em;">
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="Players-tab" data-toggle="pill" href="#Players" role="tab" aria-controls="Players" aria-selected="true">
+                        <h5>{{FixtureDetails[0]?.teamName}}</h5>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="Achievement-tab" data-toggle="pill" href="#Achievement" role="tab" #achievetab aria-controls="Achievement" aria-selected="false">
+                        <h5>{{FixtureDetails[1]?.teamName}}</h5>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tab-content" id="pills-tabContent">
+
+            <div class="tab-pane fade show active" id="Players" role="tabpanel" aria-labelledby="Players-tab">
+                <div class="aaa">
+                    <div class="search">
+                        <input class="form-control" type="text" name="search" [(ngModel)]="firstplayer" autocomplete="off" placeholder="Search any">
+                    </div>
+                    <div class="teambutton">
+                        <button type="button" (click)="firstplayer=''" class="btn btn-warning">Clear</button>&nbsp;
+                    </div>
+                </div>
+
+                <div style="height: 350px; overflow: auto;">
+                    <div style="padding-bottom: 1em;">
+                        <div *ngFor="let p of firstTeamPlayers | filter:firstplayer" (click)="ReasonAlert(p.AvaialReason)" class="pointer" [class.cricketplayer]="checkcricket()" [class.footballplayer]="checkfootballe()" [class.rugbyplayer]="checkrugby()">
+                            <div class="Left3">
+                                <div class="playername">{{p.playerFName}}<br> {{p.playerLName}}</div>
+                            </div>
+                            <div class="Right3">
+                                <div class="playerdetails">
+                                    <div>▫Availability: {{p.fixtureAvaial}}</div>
+                                    <div>▫Confirm: {{p.Confirm}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div><br><span *ngIf="addremoveshow()" class="aaa title">No of Players selected: {{firstTeamPlayers.length}}</span>
+            </div>
+
+            <div class="tab-pane fade" id="Achievement" role="tabpanel" aria-labelledby="Achievement-tab">
+                <div class="aaa">
+                    <div class="search">
+                        <input class="form-control" type="text" name="search" [(ngModel)]="secondplayer" autocomplete="off" placeholder="Search any">
+                    </div>
+                    <div class="teambutton">
+                        <button type="button" (click)="secondplayer=''" class="btn btn-warning">Clear</button>&nbsp;
+                    </div>
+                </div>
+
+                <div style="height: 350px; overflow: auto;">
+                    <div style="padding-bottom: 1em;">
+                        <div *ngFor="let p of secondTeamPlayers | filter:secondplayer" (click)="ReasonAlert(p.AvaialReason)" class="pointer" [class.cricketplayer]="checkcricket()" [class.footballplayer]="checkfootballe()" [class.rugbyplayer]="checkrugby()">
+                            <div class="Left3">
+                                <div class="playername">{{p.playerFName}}<br> {{p.playerLName}}</div>
+                            </div>
+                            <div class="Right3">
+                                <div class="playerdetails">
+                                    <div>▫Availability: {{p.fixtureAvaial}}</div>
+                                    <div>▫Confirm: {{p.Confirm}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><br>
+                <span *ngIf="addremoveshow()" class="aaa title">No of Players selected: {{secondTeamPlayers.length}}</span>
+            </div>
+
+        </div>
+        <br>
+
+    </div>
+    <div class="Right">
+        <div class="blur">
+            <br>
+            <div class="menu" *ngIf="addremoveshow() && show()">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target=".addplayer">Add
+                Player</button>&nbsp;&nbsp;
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".removeplayer">Remove
+                Player</button>
+            </div><br>
+
+            <div class="menu" *ngIf="startfixtureshow() && showadmin() && iscreatedadmin()">
+                <button (click)="startfixture()" type="button" class="btn btn-warning">Start Fixture</button>
+            </div><br>
+
+            <div class="details">
+                <p><span class="title">Structure : </span>{{FixtureDetails[0]?.strutureName}}</p>
+                <p><span class="title">Time : </span>{{FixtureDetails[0]?.fixtureTime.substring(0,5)}}</p>
+                <p><span class="title">Date : </span>{{FixtureDetails[0]?.fixtureDate | date:'mediumDate'}}</p>
+                <p><span class="title">Venue : </span>{{FixtureDetails[0]?.venue}}</p>
+                <br>
+            </div>
+
+            <div class="menu" *ngIf="addremoveshow() && show() && iscreatedadmin()">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">
+                <i class="fa fa-edit" style="font-size:26px" ></i>
+            </button>&nbsp;&nbsp;
+
+                <button type="button" class="btn btn-danger" (click)="deleteFixture()">
+                <i style="font-size: 1.5em;" class="fa fa-trash pointer"></i>
+            </button>
+            </div><br>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Edit Fixture Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose2>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="login-page">
+                    <div class="form">
+                        <form [formGroup]="EditFixture" (ngSubmit)="FixtureSubmit()">
+                            <br>
+                            <div class="form-group">
+                                <label for="fixtureVenue">Venue</label>
+                                <input [class.is-invalid]="EditFixture.get('fixtureVenue').invalid && EditFixture.get('fixtureVenue').touched" formControlName="fixtureVenue" type="text" class="form-control form-control-lg" id="fixtureVenue" placeholder="{{FixtureDetails[0]?.venue}}">
+                                <small [class.d-none]="EditFixture.get('fixtureVenue').valid || EditFixture.get('fixtureVenue').untouched" class="text-danger">Venue required</small>
+                            </div><br>
+
+                            <div class="form-group">
+                                <label for="fixtureDate">Fixture Date</label>
+                                <input [class.is-invalid]="EditFixture.get('fixtureDate').invalid && EditFixture.get('fixtureDate').touched" formControlName="fixtureDate" type="date" class="form-control form-control-lg" id="fixtureDate">
+                                <small [class.d-none]="EditFixture.get('fixtureDate').valid || EditFixture.get('fixtureDate').untouched" class="text-danger">Date Required</small>
+                            </div><br>
+
+                            <div class="form-group">
+                                <label for="fixtureTime">Fixture Time</label>
+                                <input [class.is-invalid]="EditFixture.get('fixtureTime').invalid && EditFixture.get('fixtureTime').touched" formControlName="fixtureTime" type="time" class="form-control form-control-lg" id="fixtureTime">
+                                <small [class.d-none]="EditFixture.get('fixtureTime').valid || EditFixture.get('fixtureTime').untouched" class="text-danger">Time Required</small>
+                            </div><br>
+
+                            <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
+                            <button [disabled]="EditFixture.invalid" type="submit" class="btn btn-primary">Submit</button>
+
+                        </form>
+
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade addplayer" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div style="height: 500px; overflow: auto;">
+                <table class="table table-hover table-bordered">
+                    <thead class="thead-dark">
+                        <tr style="height: 1em;">
+                            <th scope="col">Name</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col">Age</th>
+                            <th scope="col">Mobile No</th>
+                            <th class="Add"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="body">
+                        <tr *ngFor="let p of AddFixturePlayers">
+                            <td>{{p.playerFName}} {{p.playerLName}}</td>
+                            <td>{{p.playerGender}}</td>
+                            <td>{{p.playerDOB | date:'mediumDate'}}</td>
+                            <td>{{p.playerteleNum}}</td>
+                            <td><button (click)="AddPlayer(p.userId)" type="button" class="btn btn-primary">Add</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button type="button" class="btn btn-warning btn-lg" data-dismiss="modal" #ModalClose>Close</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade removeplayer" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div style="height: 500px; overflow: auto;">
+                <table class="table table-hover table-bordered">
+                    <thead class="thead-dark">
+                        <tr style="height: 1em;">
+                            <th scope="col">Name</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col">Age</th>
+                            <th scope="col">Mobile No</th>
+                            <th class="Add"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="body">
+                        <tr *ngFor="let p of RemoveFixturePlayers">
+                            <td>{{p.playerFName}} {{p.playerLName}}</td>
+                            <td>{{p.playerGender}}</td>
+                            <td>{{p.playerDOB | date:'mediumDate'}}</td>
+                            <td>{{p.playerteleNum}}</td>
+                            <td><button (click)="RemovePlayer(p.userId)" type="button" class="btn btn-danger">Remove</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button type="button" class="btn btn-warning btn-lg" data-dismiss="modal" #ModalClose>Close</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,268 @@
+<div style="width: 100%; overflow: hidden;">
+    <div class="Left">
+        <br>
+        <a (click)="back()" class="previous round">&#8249; Back</a>
+        <div class="Team">
+            {{FixtureDetails[0]?.instituteName}} vs {{FixtureDetails[1]?.instituteName}}
+        </div>
+        <div class="menu" style="padding-top: 2em;">
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="Players-tab" data-toggle="pill" href="#Players" role="tab" aria-controls="Players" aria-selected="true">
+                        <h5>{{FixtureDetails[0]?.teamName}}</h5>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="Achievement-tab" data-toggle="pill" href="#Achievement" role="tab" #achievetab aria-controls="Achievement" aria-selected="false">
+                        <h5>{{FixtureDetails[1]?.teamName}}</h5>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tab-content" id="pills-tabContent">
+
+            <div class="tab-pane fade show active" id="Players" role="tabpanel" aria-labelledby="Players-tab">
+                <div class="aaa">
+                    <div class="search">
+                        <input class="form-control" type="text" name="search" [(ngModel)]="firstplayer" autocomplete="off" placeholder="Search any">
+                    </div>
+                    <div class="teambutton">
+                        <button type="button" (click)="firstplayer=''" class="btn btn-warning">Clear</button>&nbsp;
+                    </div>
+                </div>
+
+                <div style="height: 330px; overflow: auto;">
+                    <div style="padding-bottom: 0em;">
+                        <div *ngFor="let p of firstTeamPlayers | filter:firstplayer" (click)="currentPlayer(p.userId)" [class.cricketplayer]="checkcricket()" [class.footballplayer]="checkfootballe()" [class.rugbyplayer]="checkrugby()">
+                            <div class="Left3">
+                                <div class="playername pointer" (click)="navigateplayer1(p.playerID)">
+                                    {{p.playerFName}}<br> {{p.playerLName}}</div>
+                            </div>
+                            <div class="Right3">
+                                <div class="playerdetails pointer" data-toggle="modal" data-target="#team1model" (click)="setScore(p.playerScore,p.wickets,p.givescore,p.overs,p.outnotout,p.ballFaced,p.Tries,p.FieldGoals,p.Conversions)">
+                                    <div>Score: {{p.playerScore}}<span *ngIf="isCricket()">({{p.ballFaced}})</span></div>
+                                    <div *ngIf="isCricket()">{{p.outnotout}}<br>
+                                        <hr>Bowling: {{p.wickets}}-{{p.givescore}}({{p.overs}})
+                                    </div>
+                                    <div *ngIf="checkrugby()">
+                                        Tries:{{p.Tries}}<br> FieldGoals:{{p.FieldGoals}}
+                                        <br> Conversions: {{p.Conversions}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><br>
+                <div class="points">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Total Score={{Total1[0]?.sumScore+realextra1}}
+                    <span *ngIf="isCricket()">-{{Wicket1[0]?.wickets}}({{Total2[0]?.overs}})</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span data-toggle="modal" data-target="#extra1" class="pointer">
+                        <span *ngIf="checkcricket()">Extras=</span><span *ngIf="checkfootballe() || checkrugby()">Penalty=</span> {{FixtureDetails[0]?.extras}}
+                    </span>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="Achievement" role="tabpanel" aria-labelledby="Achievement-tab">
+                <div class="aaa">
+                    <div class="search">
+                        <input class="form-control" type="text" name="search" [(ngModel)]="secondplayer" autocomplete="off" placeholder="Search any">
+                    </div>
+                    <div class="teambutton">
+                        <button type="button" (click)="secondplayer=''" class="btn btn-warning">Clear</button>&nbsp;
+                    </div>
+                </div>
+
+                <div style="height: 330px; overflow: auto;">
+                    <div style="padding-bottom: 0em;">
+                        <div *ngFor="let p of secondTeamPlayers | filter:secondplayer" (click)="currentPlayer(p.userId)" [class.cricketplayer]="checkcricket()" [class.footballplayer]="checkfootballe()" [class.rugbyplayer]="checkrugby()">
+                            <div class="Left3">
+                                <div class="playername pointer" (click)="navigateplayer2(p.playerID)">
+                                    {{p.playerFName}}<br> {{p.playerLName}}</div>
+                            </div>
+                            <div class="Right3">
+                                <div class="playerdetails pointer" data-toggle="modal" data-target="#team2model" (click)="setScore(p.playerScore,p.wickets,p.givescore,p.overs,p.outnotout,p.ballFaced,p.Tries,p.FieldGoals,p.Conversions)">
+                                    <div>Score: {{p.playerScore}}<span *ngIf="isCricket()">({{p.ballFaced}})</span></div>
+                                    <div *ngIf="isCricket()">{{p.outnotout}}<br>
+                                        <hr>Bowling: {{p.wickets}}-{{p.givescore}}({{p.overs}})
+                                    </div>
+                                    <div *ngIf="checkrugby()">
+                                        Tries:{{p.Tries}}<br> FieldGoals:{{p.FieldGoals}}
+                                        <br> Conversions: {{p.Conversions}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><br>
+
+                <div class="points">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Total Score={{Total2[0]?.sumScore+realextra2}}
+                    <span *ngIf="isCricket()">-{{Wicket2[0]?.wickets}}({{Total1[0]?.overs}})</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span data-toggle="modal" data-target="#extra2" class="pointer">
+                        <span *ngIf="checkcricket()">Extras=</span><span *ngIf="checkfootballe() || checkrugby()">Penalty=</span> {{FixtureDetails[1]?.extras}}
+                    </span>
+                </div>
+            </div>
+
+        </div>
+        <br>
+
+    </div>
+    <div class="Right">
+        <div class="blur">
+            <br>
+            <div class="details">
+                <p><span class="title">Structure : </span>{{FixtureDetails[0]?.strutureName}}</p>
+                <p><span class="title">Time : </span>{{FixtureDetails[0]?.fixtureTime.substring(0,8)}}</p>
+                <p><span class="title">Date : </span>{{FixtureDetails[0]?.fixtureDate | date:'mediumDate'}}</p>
+                <p><span class="title">Venue : </span>{{FixtureDetails[0]?.venue}}</p>
+                <p *ngIf="showwhenfinished()"><span class="title">{{FixtureDetails[0]?.teamName}} Score:
+                </span>{{this.Total1[0]?.sumScore+realextra1}}</p>
+                <p *ngIf="showwhenfinished()"><span class="title">{{FixtureDetails[1]?.teamName}} Score:
+                </span>{{this.Total2[0]?.sumScore+realextra2}}</p>
+
+                <br>
+            </div>
+            <div class="menu" *ngIf="finished() && show() && iscreatedadmin()">
+                <button class="btn btn-danger btn-block middle" (click)="postponefixture()">Postpone Fixture</button><br>
+                <button class="btn btn-success btn-block middle" (click)="finishfixture()">Finish Fixture</button><br>
+            </div>
+            <div>
+                <div *ngIf="instituteView1()">
+                    <button type="button" class="btn btn-primary middle" data-toggle="modal" data-target=".bd-example-modal-lg1">Description
+                    <i class='fa fa-info-circle' style='font-size:26px'></i></button>
+                </div><br>
+                <div *ngIf="instituteView2()">
+                    <button type="button" class="btn btn-primary middle" data-toggle="modal" data-target=".bd-example-modal-lg2">Description
+                    <i class='fa fa-info-circle' style='font-size:26px'></i>
+                    </button>
+                </div>
+                <p *ngIf="showwhenfinished()"><span class="wonteam aaa" *ngIf="wonteamname!='draw'">{{wonteamname}} Won</span>
+                    <span class="wonteam aaa" *ngIf="wonteamname=='draw'">Draw</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="finished() && show()" class="modal fade" id="team1model" tabindex="-1" role="dialog" aria-labelledby="team1modelTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Score</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose1>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                Enter Score:&nbsp;&nbsp;&nbsp;<input type="number" value="" [(ngModel)]=scoreModel.playerScore><br><br>
+                <div *ngIf="isCricket()">
+                    Enter Balls faced: &nbsp;&nbsp;&nbsp;<input type="number" value="" step="1" [(ngModel)]=scoreModel.balls><br><br>
+                    <label for="cars">Status:</label>
+                    <select name="cars" id="cars" [(ngModel)]=scoreModel.status>
+                        <option value="out">Out</option>
+                        <option value="notout">NotOut</option>
+                    </select><br>
+                    <hr> Enter Overs: &nbsp;&nbsp;&nbsp;<input type="number" value="" step="0.1" [(ngModel)]=scoreModel.overs><br><br> Enter given marks: &nbsp;&nbsp;&nbsp;<input type="number" value="" step="1" [(ngModel)]=scoreModel.givescore><br><br> Enter
+                    wickets: &nbsp;&nbsp;&nbsp;<input type="number" value="" step="1" [(ngModel)]=scoreModel.wickets><br><br>
+                </div>
+                <div *ngIf="checkrugby()">
+                    Tries: &nbsp;&nbsp;&nbsp;<input type="number" value="" step="1" [(ngModel)]=scoreModel.Tries><br><br> Field Goals: &nbsp;&nbsp;&nbsp;
+                    <input type="number" value="" step="1" [(ngModel)]=scoreModel.FieldGoals><br><br> Conversions: &nbsp;&nbsp;&nbsp;<input type="number" value="" step="1" [(ngModel)]=scoreModel.Conversions><br><br>
+                </div>
+                <button class="btn btn-success" (click)="submitPlayerScore()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="finished() && show()" class="modal fade" id="team2model" tabindex="-1" role="dialog" aria-labelledby="team2modelTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Score</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose2>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                Enter Score:&nbsp;&nbsp;&nbsp;<input type="number" value="" [(ngModel)]=scoreModel.playerScore><br><br>
+                <div *ngIf="isCricket()">
+                    Enter Balls faced: &nbsp;&nbsp;&nbsp;<input type="number" value="" step="1" [(ngModel)]=scoreModel.balls><br><br>
+                    <label for="cars">Status:</label>
+                    <select name="cars" id="cars" [(ngModel)]=scoreModel.status>
+                        <option value="out">Out</option>
+                        <option value="notout">NotOut</option>
+                    </select><br>
+                    <hr>Enter Overs: &nbsp;&nbsp;&nbsp;<input type="number" value="" step="0.1" [(ngModel)]=scoreModel.overs><br><br> Enter given marks: &nbsp;&nbsp;&nbsp;<input type="number" value="" step="1" [(ngModel)]=scoreModel.givescore><br><br> Enter
+                    wickets: &nbsp;&nbsp;&nbsp;<input type="number" value="" step="1" [(ngModel)]=scoreModel.wickets><br><br>
+                </div>
+                <div *ngIf="checkrugby()">
+                    Tries: &nbsp;&nbsp;&nbsp;<input type="number" value="" step="1" [(ngModel)]=scoreModel.Tries><br><br> Field Goals: &nbsp;&nbsp;&nbsp;
+                    <input type="number" value="" step="1" [(ngModel)]=scoreModel.FieldGoals><br><br> Conversions: &nbsp;&nbsp;&nbsp;<input type="number" value="" step="1" [(ngModel)]=scoreModel.Conversions><br><br>
+                </div>
+                <button class="btn btn-success" (click)="submitPlayerScore1()">Submit</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="finished() && show()" class="modal fade" id="extra1" tabindex="-1" role="dialog" aria-labelledby="extra1Title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Score</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose3>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                Enter extras: &nbsp;&nbsp;&nbsp;<input type="number" value="" step="1" [(ngModel)]=extras1>&nbsp;&nbsp;&nbsp;
+                <button class="btn btn-success" (click)="submitExtra1()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="finished() && show()" class="modal fade" id="extra2" tabindex="-1" role="dialog" aria-labelledby="extraTitle2" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Score</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose4>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                Enter extras: &nbsp;&nbsp;&nbsp;<input type="number" value="" step="1" [(ngModel)]=extras2>&nbsp;&nbsp;&nbsp;
+                <button class="btn btn-success" (click)="submitExtra2()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <textarea id="w3review" name="w3review" rows="15" cols="10" [(ngModel)]="description1" style="font-size: 1.5em;">
+            </textarea>
+            <button *ngIf="show()" class="btn btn-success" (click)="submitDescrip1()">Submit</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel2" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <textarea id="w3review" name="w3review" rows="15" cols="10" [(ngModel)]=description2>
+            </textarea>
+            <button *ngIf="show()" class="btn btn-success" (click)="submitDescrip2()">Submit</button>
+        </div>
+    </div>
+</div>

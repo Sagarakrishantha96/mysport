@@ -1,0 +1,84 @@
+#intro {
+    width: 100%;
+    position: relative;
+    background: url("/assets/intro-bg.png") center bottom no-repeat;
+    background-size: cover;
+    padding: 200px 0 150px 0;
+  }
+  
+  #intro .intro-img {
+    width: 50%;
+    float: right;
+  }
+  
+  #intro .intro-info {
+    width: 50%;
+    float: left;
+  }
+  
+  #intro .intro-info h2 {
+    color: #fff;
+    margin-bottom: 60px;
+    font-size: 48px;
+    font-weight: 700;
+  }
+  
+  
+  #intro .intro-info .btn-get-started,
+  #intro .intro-info .btn-services {
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 10px 32px;
+    border-radius: 50px;
+    transition: 0.5s;
+    margin: 0 20px 20px 0;
+    color: #fff;
+  }
+  
+  #intro .intro-info .btn-get-started {
+    background: #007bff;
+    border: 2px solid #007bff;
+    color: #fff;
+  }
+  
+  #intro .intro-info .btn-get-started:hover {
+    background: none;
+    border-color: #fff;
+    color: #fff;
+  }
+  
+  #intro .intro-info .btn-services {
+    border: 2px solid #fff;
+  }
+  
+  #intro .intro-info .btn-services:hover {
+    background: #007bff;
+    border-color: #007bff;
+    color: #fff;
+  }
+
+
+  .section-header h3 {
+    font-size: 36px;
+    color: #283d50;
+    text-align: center;
+    font-weight: 500;
+    position: relative;
+    padding-top: 2em;
+  }
+
+  .section-header p {
+    text-align: center;
+    margin: auto;
+    font-size: 15px;
+    padding-bottom: 60px;
+    color: #556877;
+    width: 50%;
+  }
+
+  .section-header ul{
+    text-align: center;
+  }

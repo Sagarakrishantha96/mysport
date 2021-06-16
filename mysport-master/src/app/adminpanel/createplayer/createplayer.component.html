@@ -1,0 +1,76 @@
+<br>
+<a routerLink="/adminpanel" class="previous round">&#8249; Back</a>
+<div id="player-page">
+    <div class="form">
+        <form [formGroup]="createPlayer" (ngSubmit)="playerSubmit()">
+            <h3>Enter player details</h3><br>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="firstNamePlayer">First Name</label>
+                    <input [class.is-invalid]="firstNamePlayer.touched && firstNamePlayer.invalid" formControlName="firstNamePlayer" type="text" class="form-control form-control-lg" id="firstNamePlayer" required placeholder="First name">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="secondNamePlayer">Last Name</label>
+                    <input [class.is-invalid]="secondNamePlayer.touched && secondNamePlayer.invalid" formControlName="secondNamePlayer" type="text" class="form-control form-control-lg" id="secondNamePlayer" required placeholder="Last name">
+                </div>
+
+                <div *ngIf="(firstNamePlayer.touched && firstNamePlayer.invalid) || secondNamePlayer.invalid && secondNamePlayer.touched">
+                    <small class="text-danger">First name and last name reuired and must contain more than 3 charactors<br></small>
+                </div>
+            </div><br>
+
+            <div class="form-group">
+                <label for="perAddressPlayer">Address</label>
+                <input [class.is-invalid]="createPlayer.get('perAddressPlayer').invalid && createPlayer.get('perAddressPlayer').touched" formControlName="perAddressPlayer" type="text" class="form-control form-control-lg" id="perAddressPlayer" required placeholder="1234 Main St">
+                <small [class.d-none]="createPlayer.get('perAddressPlayer').valid || createPlayer.get('perAddressPlayer').untouched" class="text-danger">Permenent address required</small>
+            </div><br>
+
+            <div class="form-group">
+                <label for="teleNoPlayer">Telephone Number</label>
+                <input [class.is-invalid]="teleNoPlayer.invalid && teleNoPlayer.touched" formControlName="teleNoPlayer" type="tel" class="form-control form-control-lg" id="teleNoPlayer" placeholder="+94 71 2345678" required>
+
+                <div *ngIf="teleNoPlayer.invalid && teleNoPlayer.touched">
+                    <small *ngIf="teleNoPlayer.errors?.required" class="text-danger">Telephone number required</small>
+                    <small *ngIf="teleNoPlayer.errors?.pattern" class="text-danger">Invalid telephone number</small>
+                </div>
+
+            </div><br>
+
+            <div class="form-group">
+                <label for="emailAddress">Email Address</label>
+                <input [class.is-invalid]="createPlayer.get('emailAddress').invalid && createPlayer.get('emailAddress').touched" formControlName="emailAddress" type="text" class="form-control form-control-lg" id="emailAddress" required placeholder="ABC@gmail.com">
+
+                <small [class.d-none]="createPlayer.get('emailAddress').valid || createPlayer.get('emailAddress').untouched" class="text-danger">Email address is required</small>
+            </div><br>
+
+            <div class="form-group">
+                <label for="dobpPlayer">Date of birth</label>
+                <input [class.is-invalid]="createPlayer.get('dobpPlayer').invalid && createPlayer.get('dobpPlayer').touched" formControlName="dobpPlayer" type="date" class="form-control form-control-lg" id="dobpPlayer">
+                <small [class.d-none]="createPlayer.get('dobpPlayer').valid || createPlayer.get('dobpPlayer').untouched" class="text-danger">Date of birth required</small>
+            </div><br>
+
+            <div class="form-check form-check-inline">
+                <input formControlName="MFplayer" class="form-check-input" type="radio" name="MFplayer" id="maleplayer" value="male" required>
+                <label class="form-check-label" for="maleplayer">Male</label>
+            </div>&nbsp;
+            <div class="form-check form-check-inline">
+                <input formControlName="MFplayer" class="form-check-input" type="radio" name="MFplayer" id="femaleplayer" value="female" required>
+                <label class="form-check-label" for="femaleplayer">female</label>
+            </div>
+            <div *ngIf="createPlayer.get('MFplayer').errors?.required" class="text-danger"><small>required</small></div>
+            <br>
+
+            <div class="form-group">
+                <label for="PlayerStructure">Team Structure</label>
+                <select [class.is-invalid]="createPlayer.get('PlayerStructure').invalid && createPlayer.get('PlayerStructure').touched" formControlName="PlayerStructure" class="form-control" id="exampleFormControlSelect1">
+                    <option class="option" *ngFor="let st of Structures" [value]=st.strutureId>{{st.strutureName}}</option>
+                </select>
+                <small [class.d-none]="createPlayer.get('PlayerStructure').valid || createPlayer.get('PlayerStructure').untouched" class="text-danger">Required</small>
+            </div><br>
+
+            <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
+            <button [disabled]="createPlayer.invalid" type="submit" class="btn btn-primary">Next</button>
+        </form>
+    </div>
+</div>

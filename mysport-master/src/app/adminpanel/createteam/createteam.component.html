@@ -1,0 +1,40 @@
+<br>
+<a routerLink="/adminpanel" class="previous round">&#8249; Back</a>
+<div id="team-page">
+    <div class="form">
+        <form [formGroup]="CreateTeam" (ngSubmit)="TeamSubmit()">
+            <h3>Enter Teams details</h3><br>
+            <div class="form-group">
+                <label for="TeamName">Team Name</label>
+                <input [class.is-invalid]="CreateTeam.get('TeamName').invalid && CreateTeam.get('TeamName').touched" formControlName="TeamName" type="text" class="form-control form-control-lg" id="TeamName" required placeholder="Team ABC">
+                <small [class.d-none]="CreateTeam.get('TeamName').valid || CreateTeam.get('TeamName').untouched" class="text-danger">Team name required</small>
+            </div><br>
+
+            <div class="form-group">
+                <label for="TeamStructure">Team Structure</label>
+                <select [class.is-invalid]="CreateTeam.get('TeamStructure').invalid && CreateTeam.get('TeamStructure').touched" formControlName="TeamStructure" class="form-control" id="exampleFormControlSelect1">
+                    <option class="option" *ngFor="let st of Structures" [value]=st.strutureId>{{st.strutureName}}</option>
+                </select>
+                <small [class.d-none]="CreateTeam.get('TeamStructure').valid || CreateTeam.get('TeamStructure').untouched" class="text-danger">Structure Required</small>
+            </div><br>
+
+            <div class="form-group">
+                <label for="Sport">Sport</label>
+                <select [class.is-invalid]="CreateTeam.get('Sport').invalid && CreateTeam.get('Sport').touched" formControlName="Sport" class="form-control" id="exampleFormControlSelect1">
+                    <option class="option" *ngFor="let s of Sports" [value]=s.sportId>{{s.sportName}}</option>
+                </select>
+                <small [class.d-none]="CreateTeam.get('Sport').valid || CreateTeam.get('Sport').untouched" class="text-danger">Sport Required</small>
+            </div><br>
+
+            <div class="form-group">
+                <label for="Coach">Coach</label>
+                <select [class.is-invalid]="CreateTeam.get('Coach').invalid && CreateTeam.get('Coach').touched" formControlName="Coach" class="form-control" id="exampleFormControlSelect1">
+                    <option class="option" *ngFor="let c of Coaches" [value]=c.userId>{{c.coachFName}} {{c.coachLName}}</option>
+                </select>
+                <small [class.d-none]="CreateTeam.get('Coach').valid || CreateTeam.get('Coach').untouched" class="text-danger">Coach Required</small>
+            </div><br>
+            <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
+            <button [disabled]="CreateTeam.invalid" type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>

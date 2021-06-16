@@ -1,0 +1,90 @@
+<div>
+    <nav class="navbar  navbar-expand ">
+        <a class="navbar-brand mb-0 h1" routerLink="/home" open>
+            <img src="\assets\sss.png" width="50" height="50" class="d-inline-block align-top" alt="" loading="lazy"> MySport
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" routerLink="/adminpanel">Institute</a>
+                <a class="nav-item nav-link" routerLink="/institutecoach">Coach</a>
+                <a class="nav-item nav-link" routerLink="/player">Player</a>
+                <a class="nav-item nav-link" routerLink="/parentprofile">Parent</a>
+            </div>
+            <div class="navbar-nav ml-auto">
+                <a class="nav-link " href="#about">About Us</a>
+                <a class="nav-link" routerLink="/login">
+                    <button type="button" *ngIf="!_auth.currentUserValue" class="btn btn-primary">Log
+            in</button></a>
+                <a class="nav-link" routerLink="/signup">
+                    <button *ngIf="!_auth.currentUserValue" type="button" class="btn btn-success">
+            Sign up</button></a>
+                <a class="nav-link " style="cursor:pointer" *ngIf="_auth.currentUserValue" (click)="_auth.logoutUser()">Log out</a>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<div>
+    <router-outlet></router-outlet>
+</div>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 footer-item">
+                <h4>Web developers</h4>
+                Supun Madushanka<br> Mobile :-0705630771 <br>Email:-madushanka.18@itfac.mrt.ac.lk
+                <br><br> Sagara Krishantha<br> Mobile :-0712145254 <br>Email:-krishantha.18@itfac.mrt.ac.lk
+                <br><br>
+            </div>
+            <div class="col-md-3 footer-item">
+                <h4>Mobile developers</h4>
+                Nishan Shyamika<br> Mobile :-0715798742 <br>Email:-shyamika.18@itfac.mrt.ac.lk
+                <br><br>Udari sanjeewani<br> Mobile :-0715798732 <br>Email:-sanjeewani.18@itfac.mrt.ac.lk
+                <br><br>
+            </div>
+            <div class="col-md-3 footer-item">
+                <h4>Go to</h4>
+                <ul class="menu-list">
+                    <li><a routerLink="/login">Login</a></li>
+                    <li><a routerLink="/signup">SignUp</a></li>
+                    <li><a href="#about">Our Services</a></li>
+                    <li><a href="#solution">Our solution</a></li>
+                    <li><a href="#Whoweare">Who we are</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 footer-item last-item">
+                <h4>Send Review</h4>
+                <div class="contact-form">
+
+                    <form id="contact footer-contact" [formGroup]="sendmail" (ngSubmit)="ReviewSubmit()">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <fieldset>
+                                    <input [class.is-invalid]="sendmail.get('FullName').invalid && sendmail.get('FullName').touched" formControlName="FullName" name="name" type="text" class="form-control" id="name" placeholder="Full Name" required="">
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <fieldset>
+                                    <input [class.is-invalid]="sendmail.get('email').invalid && sendmail.get('email').touched" formControlName="email" name="email" type="text" class="form-control" id="email" pattern="[^ @]*@[^ @]*" placeholder="E-Mail Address" required="">
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-12">
+                                <fieldset>
+                                    <textarea [class.is-invalid]="sendmail.get('message').invalid && sendmail.get('message').touched" formControlName="message" name="message" rows="6" class="form-control" id="message" placeholder="Your Message" required=""></textarea>
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-12">
+                                <button [disabled]="sendmail.invalid" type="submit" id="form-submit" class="filled-button">Send</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

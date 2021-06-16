@@ -1,0 +1,137 @@
+<div style="width: 100%; overflow: hidden;">
+    <div class="Left">
+        <br>
+        <a (click)="back()" class="previous round">&#8249; Back</a>
+
+    </div>
+    <div class="Right">
+        <div class="summery">
+            <button *ngIf="show() && iscreatedadmin()" type="button" class="btn mystyle btn-block btn-outline-light" [routerLink]="['/createfixture',tournamentId]">Create Fixture</button><br><br>
+            <button *ngIf="show() && iscreatedadmin()" type="button" class="btn mystyle btn-block btn-outline-light" data-toggle="modal" data-target="#summery">Institutes</button>
+        </div>
+    </div>
+</div>
+
+<div class="name aaa"><img class="rotate230" src="\assets\ball.png" width="60" height="60">{{Tournament[0]?.tournamentName}}
+    <img class="rotate30" src="\assets\ball.png" width="60" height="60">
+</div>
+
+<h4 class="aaa topic">Created Fixtures</h4><br>
+
+<div class="aaa">
+    <i class="fa fa-search" style="color: rgb(25, 28, 197);font-size: 1.5em;"></i>&nbsp;&nbsp;
+    <div class="search">
+        <input class="form-control" type="text" name="search" [(ngModel)]="serachFixture" autocomplete="off" placeholder="Search any">
+    </div>
+    <div class="teambutton">
+        <button type="button" (click)="serachFixture=''" class="btn btn-warning">Clear</button>&nbsp;
+    </div>
+</div>
+
+<div style="height: 450px; overflow: auto;">
+    <div style="padding-bottom: 1em;">
+        <div *ngFor="let p of UpcomingFixtures| filter:serachFixture" [routerLink]="['/selectedfixture',p.fixtureId]" class="pointer" [class.fixturequali]="checkquali(p.typeId)" [class.fixturequater]="checkquater(p.typeId)" [class.fixturesemi]="checksemi(p.typeId)"
+            [class.fixturefinal]="checkfinal(p.typeId)">
+            <div class="Left1">
+                <div class="fixtureTitle">
+                    {{p.instituteone}} vs<br> {{p.institutetwo}}
+                </div>
+            </div>
+            <div class="Right1">
+                <div class="fixturdetails">
+                    <div>▫ {{p.strutureName}}</div>
+                    <div>▫ {{p.fixtureTime.substring(0,8)}}</div>
+                    <div>▫ {{p.fixtureDate | date:'mediumDate'}}</div>
+                    <div>▫ {{p.venue}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><br><br>
+
+<div class="modal fade" id="summery" tabindex="-1" role="dialog" aria-labelledby="summeryTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="display: none;">
+                <h5 class="modal-title" id="exampleModalLongTitle">Summery</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose2>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <table class="table table-hover table-bordered">
+                    <thead class="thead-dark">
+                        <tr style="height: 1em;">
+                            <th scope="col">Institute</th>
+                            <th scope="col" *ngIf="iscreatedadmin()"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="body">
+                        <tr *ngFor="let p of Summery">
+                            <td>{{p.instituteName}}&nbsp;&nbsp;<i (click)="getInfo(p.instituteId[1])" data-toggle="modal" data-target="#info" class='fa fa-info-circle pointer' style='font-size:26px;color: rgb(32, 68, 167)'></i></td>
+                            <td *ngIf="iscreatedadmin()"><button (click)="removeinstitute(p.instituteId[1])" type="button" class="btn btn-danger">Remove</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="info" tabindex="-1" role="dialog" aria-labelledby="infoTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="display: none;">
+                <h5 class="modal-title" id="exampleModalLongTitle">Summery</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose2>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="aaa">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label><span class="title">Institute Name:</span></label>
+                        </div>
+                        <div class="col-md-8">
+                            <p>{{InstituteInfo[0]?.instituteName}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label><span class="title">Institute Address:</span></label>
+                        </div>
+                        <div class="col-md-8">
+                            <p>{{InstituteInfo[0]?.instituteLocation}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label><span class="title">Admin Name:</span></label>
+                        </div>
+                        <div class="col-md-8">
+                            <p>{{InstituteInfo[0]?.adminFName}}&nbsp;{{InstituteInfo[0]?.adminLName}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label><span class="title">Admin tele No:</span></label>
+                        </div>
+                        <div class="col-md-8">
+                            <p>{{InstituteInfo[0]?.adminTeliNo}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label><span class="title">Admin Address:</span></label>
+                        </div>
+                        <div class="col-md-8">
+                            <p>{{InstituteInfo[0]?.adminAddress}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

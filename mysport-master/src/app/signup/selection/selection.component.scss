@@ -1,0 +1,25 @@
+#sele1{
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 20em;
+}
+
+table, th, td {
+    border: 5px;
+    border-collapse: collapse;
+    border-spacing: 5px;
+    padding: 25px;
+    text-align: center;
+  }
+
+h2{
+    text-align: center;
+    padding-top: 3em;
+}
+  
+img{
+    border: 5px solid rgb(30, 17, 151); 
+}

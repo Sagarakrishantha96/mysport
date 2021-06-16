@@ -1,0 +1,30 @@
+// #sing1 {
+//   position: absolute;
+//   top: 70%;
+//   left: 50%;
+//   -webkit-transform: translate(-50%, -50%);
+//   transform: translate(-50%, -50%);
+//   width: 30em;
+//   padding-bottom: 5em;
+// }
+
+.login-page {
+  width: 760px;
+  padding: 6% 0 0;
+  margin: auto;
+}
+
+.form {
+  position: relative;
+  z-index: 1;
+  background: #ffffff;
+  width: 660px;
+  margin: 5% auto 100px;
+  padding: 45px;
+  text-align: left;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+body{
+    background-image: linear-gradient(rgb(41, 189, 194),rgb(50, 48, 206));
+}

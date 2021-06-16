@@ -1,0 +1,60 @@
+<div class="login-page">
+  <div class="form">
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+      <h3>Sign up with your email</h3><br>
+
+
+      <div class="form-group">
+        <label for="signupEmail1">Email address</label>
+        <input [class.is-invalid]="userEmail.invalid && userEmail.touched" formControlName="userEmail" type="email"
+          class="form-control form-control-lg" id="signupEmail1" aria-describedby="signupemailHelp"
+          placeholder="name@example.com">
+
+        <div *ngIf="userEmail.invalid && userEmail.touched;else elseBlock1">
+          <small *ngIf="userEmail.errors?.required" class="text-danger">Email is required</small>
+          <small *ngIf="userEmail.errors?.email" class="text-danger">Must be email type</small>
+        </div>
+        <ng-template #elseBlock1>
+          <small id="signupemailHelp" class="form-text text-muted">We'll never share your email with anyone
+            else.</small>
+        </ng-template>
+
+      </div>
+
+
+      <div class="form-group">
+        <label for="signupPassword1">Enter new password</label>
+        <input [class.is-invalid]="password.invalid && password.touched" formControlName="password" type="password"
+          class="form-control form-control-lg" id="signupPassword1" required aria-describedby="passwordHelpsignup"
+          required>
+
+        <div *ngIf="password.invalid && password.touched;else elseBlock2">
+          <small *ngIf="password.errors?.required" class="text-danger">Password is required</small>
+          <small *ngIf="password.errors?.minlength|| password.errors?.maxlength" class="text-danger">Your password must
+            be 8-20 characters long<br></small>
+          <small *ngIf="password.errors?.pattern" class="text-danger">must not contain spaces, special characters, or
+            emoji</small>
+        </div>
+
+        <ng-template #elseBlock2>
+          <small id="passwordHelpsignup" class="form-text text-muted">
+            Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces,
+            special characters, or emoji.
+          </small>
+        </ng-template>
+      </div>
+
+      <div class="form-group">
+        <label for="signupPassword2">Re-enter Password</label>
+        <input [class.is-invalid]="registrationForm.errors?.misMatch" formControlName="confirmPassword" type="password"
+          class="form-control form-control-lg" id="signupPassword2" required>
+
+        <small class="text-danger" *ngIf="registrationForm.errors?.misMatch">Password do not match</small>
+      </div><br>
+
+      <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
+      <button [disabled]="registrationForm.invalid" type="submit" class="btn btn-primary">Next</button>
+    </form>
+
+  </div>
+</div>

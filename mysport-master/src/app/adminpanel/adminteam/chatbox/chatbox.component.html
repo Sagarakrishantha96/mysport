@@ -1,0 +1,50 @@
+<div class="container">
+    <div>
+        <div class="panel">
+            <div class="nano has-scrollbar" style="height:380px;">
+                <div #scrollMe class="nano-content pad-all" tabindex="0" style="right: -17px;">
+
+                    <ul class="list-unstyled media-block" *ngFor="let message of messageList">
+                        <li class="mar-btm" *ngIf="showother(message.userId) && ismyteam(message.teamId,message.instituteId)">
+                            <div class="media-body pad-hor">
+                                <div class="speech">
+                                    <a class="media-heading"><span [class.text-danger]="IsAdmin(message.RoleId)">{{message.userName}}</span></a>
+                                    <p><span [class.text-danger]="isAnnouncment(message.teamId)">{{message.messageContent}}</span></p>
+                                    <p class="speech-time">
+                                        <i class="fa fa-clock-o fa-fw"></i>{{message.messageDateTime | date:'short'}}
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="mar-btm" *ngIf="showme(message.userId) && ismyteam(message.teamId,message.instituteId)">
+                            <div class="media-body pad-hor speech-right">
+                                <div class="speech">
+                                    <a class="media-heading"><span [class.text-danger]="IsAdmin(message.RoleId)">Me</span></a>
+                                    <p><span [class.text-danger]="isAnnouncment(message.teamId)">{{message.messageContent}}</span></p>
+                                    <p class="speech-time">
+                                        <i class="fa fa-clock-o fa-fw"></i>{{message.messageDateTime | date:'short'}}
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="nano-pane">
+                    <div class="nano-slider" style="height: 141px; transform: translate(0px, 0px);"></div>
+                </div>
+            </div>
+
+            <div class="panel-footer" style="size: 3em;">
+                <div class="row">
+                    <div class="col-xs-9">
+                        <input [(ngModel)]="newMessage" (keyup)="$event.keyCode == 13 && sendMessage()" type="text" placeholder="Enter your text" class="form-control chat-input">
+                    </div>&nbsp;&nbsp;
+                    <div class="col-xs-3">
+                        <button [disabled]="newMessage==null || newMessage==''" (click)="sendMessage()" class="btn btn-primary btn-block" type="submit">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

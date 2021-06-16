@@ -1,0 +1,362 @@
+<div style="width: 100%; overflow: hidden;">
+    <div class="Left">
+        <br>
+        <a (click)="back()" class="previous round">&#8249; Back</a>
+        <div class="Team aaa">
+            <p>{{InstituteProfile[0]?.instituteName}}</p>
+        </div>
+        <div class="aaa" style="padding-top: 0em;">
+            <ul class="nav nav-pills mb-3 mainnav" id="pills-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="Team-tab" data-toggle="pill" href="#Team" role="tab" aria-controls="Team" aria-selected="true">
+                        <h5>Teams</h5>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="Coach-tab" data-toggle="pill" href="#Coach" role="tab" aria-controls="Coach" aria-selected="false">
+                        <h5>Coaches</h5>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="Player-tab" data-toggle="pill" href="#Player" role="tab" aria-controls="Player" aria-selected="false">
+                        <h5>Players</h5>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tab-content" id="pills-tabContent">
+
+            <div class="tab-pane fade show active" id="Team" role="tabpanel" aria-labelledby="Team-tab">
+                <div class="aaa">
+                    <i class="fa fa-search" style="color: blanchedalmond;font-size: 1.5em;"></i>&nbsp;&nbsp;
+                    <div class="search">
+                        <input class="form-control" type="text" name="search" [(ngModel)]="searchTeam" autocomplete="off" placeholder="Search any">
+                    </div>
+                    <div class="search">
+                        <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="searchTeam">
+                            <option class="option">Cricket</option>
+                            <option class="option">Football</option>
+                            <option class="option">Rugby</option>
+                        </select>
+                    </div>
+                    <div class="teambutton">
+                        <button type="button" (click)="searchTeam=''" class="btn btn-warning">Clear</button>&nbsp;
+                        <button *ngIf="checkadmin()" type="button" class="btn btn-success" routerLink="/createteam">Create Team</button>
+                    </div>
+                </div><br>
+
+                <div style="height: 450px; overflow: auto;padding-bottom: 1em;">
+                    <div style="padding-bottom: 2em;">
+                        <div *ngFor="let e of Teams  | filter:searchTeam" [routerLink]="checkadmin() ? ['/adminteam',e.teamId] : []" class="pointer" [class.Team1]="checkcricket(e.sportName)" [class.Team2]="checkfootballe(e.sportName)" [class.Team3]="checkrugby(e.sportName)">
+                            <div class="Left1">
+                                <div [class.cricketname]="checkcricket(e.sportName)" [class.footballname]="checkfootballe(e.sportName)" [class.footballname]="checkrugby(e.sportName)">{{e.teamName}}
+                                </div>
+                            </div>
+                            <div class="Right1">
+                                <div class="Details">
+                                    <div>▫ {{e.sportName}}</div>
+                                    <div>▫ {{e.strutureName}}</div>
+                                    <div>▫ Coach {{e.coachFName}}</div>
+                                    <div>▫ Wins-{{e.teamWins}}</div>
+                                    <div>▫ Losses-{{e.teamLoss}}</div>
+                                    <div>▫ No of Players-{{e.Players}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="Coach" role="tabpanel" aria-labelledby="Coach-tab">
+                <div class="aaa">
+                    <i class="fa fa-search" style="color: blanchedalmond;font-size: 1.5em;"></i>&nbsp;&nbsp;
+                    <div class="search">
+                        <input class="form-control" type="text" name="search" [(ngModel)]="searchCoach" autocomplete="off" placeholder="Search any">
+                    </div>
+                    <div class="teambutton">
+                        <button type="button" (click)="searchCoach=''" class="btn btn-warning">Clear</button>&nbsp;
+                        <button *ngIf="checkadmin()" type="button" class="btn btn-success" routerLink="/createcoach">Create Coach</button>
+                    </div>
+                </div><br>
+                <div style="height: 450px; overflow: auto;">
+                    <div style="padding-bottom: 2em;">
+                        <div *ngFor="let e of Coaches| filter:searchCoach" [routerLink]="checkadmin() ? ['/coachProfile',e.userId] : []" [class.cricketcoach]="checkcricket(e.sportName)" class="pointer" [class.footballcoach]="checkfootballe(e.sportName)" [class.rugbycoach]="checkrugby(e.sportName)">
+                            <div class="Left2">
+                                <div class="coachname">{{e.coachFName}}<br> {{e.coachLName}}</div>
+                            </div>
+                            <div class="Right2">
+                                <div class="coachdetails">
+                                    <div>▫ {{e.sportName}} coach</div>
+                                    <div>▫ {{e.coachNumber}}</div>
+                                    <div>▫ {{e.teams}} teams</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="Player" role="tabpanel" aria-labelledby="Player-tab">
+                <div class="aaa">
+                    <i class="fa fa-search" style="color: blanchedalmond;font-size: 1.5em;"></i>&nbsp;&nbsp;
+                    <div class="search">
+                        <input class="form-control" type="text" name="search" [(ngModel)]="searchPlayer" autocomplete="off" placeholder="Search any">
+                    </div>
+                    <div class="teambutton">
+                        <button type="button" (click)="searchPlayer=''" class="btn btn-warning">Clear</button>&nbsp;
+                        <button *ngIf="checkadmin()" type="button" class="btn btn-success" routerLink="/createplayer">Create Player</button>
+                    </div>
+                </div><br>
+                <div style="height: 450px; overflow: auto;">
+                    <div style="padding-bottom: 1em;">
+                        <div *ngFor="let p of Players| filter:searchPlayer" [routerLink]="checkadmin() ? ['/playerProfile',p.userId] : []" [class.playermale]="checkmale(p.playerGender)" [class.playerfemale]="checkfemale(p.playerGender)" class="pointer">
+                            <div class="Left3">
+                                <div class="playername">{{p.playerFName}}<br> {{p.playerLName}}</div>
+                            </div>
+                            <div class="Right3">
+                                <div class="playerdetails">
+                                    <div>▫ {{p.playerGender}}</div>
+                                    <div>▫ {{p.playerteleNum}}</div>
+                                    <div>▫ In {{p.teams}} teams</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="Right">
+        <div class="blur"><br>
+            <div class="menu" *ngIf="checkadmin()">
+                <button type="button" class="btn mystyle btn-block btn-outline-light" routerLink="/tournament">Tournaments</button>
+            </div><br>
+
+            <div class="menu" *ngIf="checkadmin()">
+                <button type="button" class="btn mystyle btn-block btn-outline-light" data-toggle="modal" data-target="#exampleModal">Announcement</button>
+            </div><br>
+
+            <button *ngIf="checkadmin()" type="button" class="btn btn-danger aaa" data-toggle="modal" data-target="#changepassword">Change
+            Password</button><br>
+
+            <div class="col-md-8 aaa">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item itt">
+                        <a style="color: rgb(255, 255, 255);font-size: 16px;text-shadow:1px 1px rgb(0, 0, 0);" class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Summery</a>
+                    </li>
+                    <li class="nav-item itt">
+                        <a style="color: rgb(255, 255, 255);font-size: 16px;text-shadow:1px 0px rgb(0, 0, 0);" class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Details</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="aaa" style="width: 80%;">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="aaa">
+                            <div class="holder"><span class="large_numbering aaa">{{TeamCount[0]?.noOfTeams}}</span> <span class="some_heading">Teams</span></div><br><br><br>
+                            <div class="holder"><span class="large_numbering aaa">{{CoachCount[0]?.noOfCoaches}}</span>
+                                <span class="some_heading">Coaches</span></div><br><br><br>
+                            <div class="holder"><span class="large_numbering aaa">{{PlayerCount[0]?.noOfPlayers}}</span>
+                                <span class="some_heading">Players</span></div><br><br>
+                        </div>
+                    </div>
+                    <div style="padding-left: 2em;" class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <i *ngIf="checkadmin()" class="fa fa-edit pointer" style="font-size:36px;color: black;" data-toggle="modal" data-target=".bd-example-modal-lg"></i>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label><span class="title">Institute Name:</span></label>
+                            </div>
+                            <div class="col-md-9">
+                                <p>{{InstituteProfile[0]?.instituteName}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label><span class="title">Institute Address:</span></label>
+                            </div>
+                            <div class="col-md-9">
+                                <p>{{InstituteProfile[0]?.instituteLocation}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label><span class="title">Admin Name:</span></label>
+                            </div>
+                            <div class="col-md-9">
+                                <p>{{AdminProfile[0]?.adminFName}} {{AdminProfile[0]?.adminLName}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label><span class="title">Admin tele No:</span></label>
+                            </div>
+                            <div class="col-md-9">
+                                <p>{{AdminProfile[0]?.adminTeliNo}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label><span class="title">Admin Address:</span></label>
+                            </div>
+                            <div class="col-md-9">
+                                <p>{{AdminProfile[0]?.adminAddress}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label><span class="title">Code:</span></label>
+                            </div>
+                            <div class="col-md-9">
+                                <p>{{InstituteProfile[0]?.secretNo}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"> Send Announcement</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <textarea id="w3review" name="w3review" rows="5" cols="55" [(ngModel)]=Announcement>
+                </textarea><br>
+                    <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-success" (click)="sendAnnouncement()">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="display: none;">
+                <h5 class="modal-title" id="exampleModalLongTitle">Edit Profile</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose1>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="login-page">
+                    <div class="form">
+                        <form [formGroup]="EditAdminProfile" (ngSubmit)="adminSubmit()">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="firstNameAdmin">First Name</label>
+                                    <input [class.is-invalid]="firstNameAdmin.invalid && firstNameAdmin.touched" formControlName="firstNameAdmin" type="text" class="form-control form-control-lg" id="firstNameAdmin" placeholder="{{AdminProfile[0]?.adminFName}}">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="secondNameAdmin">Last Name</label>
+                                    <input [class.is-invalid]="lastNameAdmin.invalid && lastNameAdmin.touched" formControlName="lastNameAdmin" type="text" class="form-control form-control-lg" id="secondNameAdmin" placeholder="{{AdminProfile[0]?.adminLName}}">
+                                </div>
+
+                                <div *ngIf="(firstNameAdmin.touched && firstNameAdmin.invalid) || lastNameAdmin.invalid && lastNameAdmin.touched">
+                                    <small class="text-danger">First name and last name reuired and must contain more
+                                        than 3
+                                        charactors<br></small>
+                                </div>
+                            </div><br>
+
+
+                            <div class="form-group">
+                                <label for="curAddressAdmin">Current Address</label>
+                                <input [class.is-invalid]="EditAdminProfile.get('addressAdmin').invalid && EditAdminProfile.get('addressAdmin').touched" formControlName="addressAdmin" type="text" class="form-control form-control-lg" id="curAddressAdmin" placeholder="{{AdminProfile[0]?.adminAddress}}">
+
+                                <small [class.d-none]="EditAdminProfile.get('addressAdmin').valid || EditAdminProfile.get('addressAdmin').untouched" class="text-danger">Address is required</small>
+                            </div><br>
+
+
+                            <div class="form-group">
+                                <label for="teleNoAdmin">Telephone Number</label>
+                                <input [class.is-invalid]="teleNoAdmin.invalid && teleNoAdmin.touched" formControlName="teleNoAdmin" type="tel" class="form-control form-control-lg" id="teleNoAdmin" placeholder="{{AdminProfile[0]?.adminTeliNo}}">
+
+                                <div *ngIf="teleNoAdmin.invalid && teleNoAdmin.touched">
+                                    <small *ngIf="teleNoAdmin.errors?.required" class="text-danger">Telephone number
+                                        required</small>
+                                    <small *ngIf="teleNoAdmin.errors?.pattern" class="text-danger">Invalid telephone
+                                        number</small>
+                                </div>
+                            </div><br>
+
+                            <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
+                            <button [disabled]="EditAdminProfile.invalid" type="submit" class="btn btn-primary">Submit</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="changepassword" tabindex="-1" role="dialog" aria-labelledby="changepasswordTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="display: none;">
+                <h5 class="modal-title" id="exampleModalLongTitle">Change Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose3>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="login-page">
+                    <div class="form">
+                        <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+
+                            <div class="form-group">
+                                <label for="signupPassword1">Enter new password</label>
+                                <input [class.is-invalid]="password.invalid && password.touched" formControlName="password" type="password" class="form-control form-control-lg" id="signupPassword1" required aria-describedby="passwordHelpsignup" required>
+
+                                <div *ngIf="password.invalid && password.touched;else elseBlock2">
+                                    <small *ngIf="password.errors?.required" class="text-danger">Password is
+                                        required</small>
+                                    <small *ngIf="password.errors?.minlength|| password.errors?.maxlength" class="text-danger">Your password must
+                                        be 8-20 characters long<br></small>
+                                    <small *ngIf="password.errors?.pattern" class="text-danger">must not contain spaces,
+                                        special characters, or
+                                        emoji</small>
+                                </div>
+
+                                <ng-template #elseBlock2>
+                                    <small id="passwordHelpsignup" class="form-text text-muted">
+                                        Your password must be 8-20 characters long, contain letters and numbers, and
+                                        must not contain spaces,
+                                        special characters, or emoji.
+                                    </small>
+                                </ng-template>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="signupPassword2">Re-enter Password</label>
+                                <input [class.is-invalid]="registrationForm.errors?.misMatch" formControlName="confirmPassword" type="password" class="form-control form-control-lg" id="signupPassword2" required>
+
+                                <small class="text-danger" *ngIf="registrationForm.errors?.misMatch">Password do not
+                                    match</small>
+                            </div><br>
+
+                            <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
+                            <button (click)="close1()" [disabled]="registrationForm.invalid" type="submit" class="btn btn-primary">Change</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

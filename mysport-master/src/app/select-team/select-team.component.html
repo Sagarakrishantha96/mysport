@@ -1,0 +1,22 @@
+<div>
+          <div class="aaa">
+            <br>
+          <button type="button" class="btn btn-success btn-lg">View My Institute</button>
+        </div>
+        <div class="scroll">
+        <table class="table table-hover table-bordered">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col" class="team"><h3>Team</h3></th>
+                <th scope="col"><h3>Sport</h3></th>
+            </tr>
+            </thead>
+            <tbody class="body">
+            <tr *ngFor="let e of Teams" class="clickable-row pointer" onclick=" location.href='https://www.youtube.com/watch?v=zTjnQ0XlAc4&list=TLPQMTUxMjIwMjA-kTnDjuKBnA&index=2'">
+              <td>{{e.teamName}}</td>
+              <td>{{e.sportName}}</td>
+            </tr>
+            </tbody>
+        </table>
+      </div>
+</div>

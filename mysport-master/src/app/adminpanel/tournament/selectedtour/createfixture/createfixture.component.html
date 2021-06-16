@@ -1,0 +1,72 @@
+<br>
+<a (click)="back()" class="previous round">&#8249; Back</a>
+<div id="login-page">
+    <div class="form">
+        <form [formGroup]="CreateFixture" (ngSubmit)="FixtureSubmit()">
+            <h3>Enter Fixture Details</h3>
+            <br>
+            <div class="form-group">
+                <label for="FixtureStructure">Fixture Structure</label>
+                <select [class.is-invalid]="CreateFixture.get('FixtureStructure').invalid && CreateFixture.get('FixtureStructure').touched" formControlName="FixtureStructure" class="form-control" id="exampleFormControlSelect1">
+                    <option class="option" *ngFor="let st of Structures" [value]=st.strutureId>{{st.strutureName}}
+                    </option>
+                </select>
+                <small [class.d-none]="CreateFixture.get('FixtureStructure').valid || CreateFixture.get('FixtureStructure').untouched" class="text-danger">Structure Required</small>
+            </div><br>
+            <div class="form-row">
+
+                <div class="form-group col-md-6">
+                    <label for="FirstTeam">Team 1</label>
+                    <select [class.is-invalid]="CreateFixture.get('FirstTeam').invalid && CreateFixture.get('FirstTeam').touched" formControlName="FirstTeam" class="form-control" id="exampleFormControlSelect1">
+                        <option class="option" *ngFor="let s of FirstTeams | filter:CreateFixture.value.FixtureStructure" [value]=s.tournamentTeamId>{{s.teamName}} ({{s.strutureName}}) from {{s.instituteName}}</option>
+                    </select>
+                    <small [class.d-none]="CreateFixture.get('FirstTeam').valid || CreateFixture.get('FirstTeam').untouched" class="text-danger">Team 1 Required</small>
+                </div><br>
+
+                <div class="form-group col-md-6">
+                    <label for="SecondTeam">Team 2</label>
+                    <select [class.is-invalid]="CreateFixture.get('SecondTeam').invalid && CreateFixture.get('SecondTeam').touched" formControlName="SecondTeam" class="form-control" id="exampleFormControlSelect1">
+                        <option class="option" *ngFor="let s of FirstTeams | filter:CreateFixture.value.FixtureStructure" [value]=s.tournamentTeamId>{{s.teamName}} ({{s.strutureName}}) from {{s.instituteName}}</option>
+                    </select>
+                    <small [class.d-none]="CreateFixture.get('SecondTeam').valid || CreateFixture.get('SecondTeam').untouched" class="text-danger">Team 2 Required</small>
+                </div><br>
+
+            </div>
+
+            <div class="form-group">
+                <label for="fixtureVenue">Venue</label>
+                <input [class.is-invalid]="CreateFixture.get('fixtureVenue').invalid && CreateFixture.get('fixtureVenue').touched" formControlName="fixtureVenue" type="text" class="form-control form-control-lg" id="fixtureVenue" required placeholder="ABC Ground">
+                <small [class.d-none]="CreateFixture.get('fixtureVenue').valid || CreateFixture.get('fixtureVenue').untouched" class="text-danger">Venue required</small>
+            </div><br>
+
+            <div class="form-group">
+                <label for="fixtureDate">Fixture Date</label>
+                <input [class.is-invalid]="CreateFixture.get('fixtureDate').invalid && CreateFixture.get('fixtureDate').touched" formControlName="fixtureDate" type="date" class="form-control form-control-lg" id="fixtureDate">
+                <small [class.d-none]="CreateFixture.get('fixtureDate').valid || CreateFixture.get('fixtureDate').untouched" class="text-danger">Date Required</small>
+            </div><br>
+
+            <div class="form-group">
+                <label for="fixtureTime">Fixture Time</label>
+                <input [class.is-invalid]="CreateFixture.get('fixtureTime').invalid && CreateFixture.get('fixtureTime').touched" formControlName="fixtureTime" type="time" class="form-control form-control-lg" id="fixtureTime">
+                <small [class.d-none]="CreateFixture.get('fixtureTime').valid || CreateFixture.get('fixtureTime').untouched" class="text-danger">Time Required</small>
+            </div><br>
+
+            <div class="form-group">
+                <label for="FixtureType">Fixture Type</label>
+                <select [class.is-invalid]="CreateFixture.get('FixtureType').invalid && CreateFixture.get('FixtureType').touched" formControlName="FixtureType" class="form-control" id="exampleFormControlSelect1">
+                    <option class="option" value="quali">qualifying</option>
+                    <option class="option" value="Quarter">Quarter finals</option>
+                    <option class="option" value="Semi">Semi finals</option>
+                    <option class="option" value="Final">Final</option>
+                </select>
+                <small [class.d-none]="CreateFixture.get('FixtureType').valid || CreateFixture.get('FixtureType').untouched" class="text-danger">Type Required</small>
+            </div><br>
+
+            <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
+            <button [disabled]="CreateFixture.invalid" type="submit" class="btn btn-primary">Submit</button>
+
+        </form>
+
+    </div>
+    <br>
+</div>

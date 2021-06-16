@@ -1,0 +1,435 @@
+.accordion-button {
+    height: 1em;
+}
+
+.table {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    table-layout: fixed;
+    border-width: 0.3em;
+    border-color: rgb(10, 10, 104);
+    background-color: white;
+}
+
+.col-md-6 {
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
+.title {
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+    text-shadow: 3px 1px black;
+    backdrop-filter: blur(2px);
+}
+
+.body {
+    height: 1em;
+    overflow: auto;
+}
+
+th,
+td {
+    padding: 25px;
+    border-width: 0.1em;
+    border-color: rgb(10, 10, 104);
+}
+
+td {
+    font-size: large;
+    font-weight: 600;
+}
+
+.tabs a:hover,
+.itt a.active {
+    background-color: rgb(121, 5, 150);
+}
+
+//th.Sport{
+//width: 6em
+//}
+.mainnav {
+    background-color: rgb(187, 199, 255);
+    border-radius: 25px;
+    padding-right: 1em;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.aaa {
+    display: table;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.tab-content {
+    margin-top: 1em;
+}
+
+.Left {
+    width: 75%;
+    float: left;
+}
+
+.Right {
+    overflow: hidden;
+    width: 25%;
+    float: right;
+    height: 50em;
+    background-image: url('../../assets/stadium.jpg');
+    background-position: center 30%;
+    background-size: 50%;
+    background-attachment: fixed;
+}
+
+.blur {
+    backdrop-filter: blur(2px);
+}
+
+.menu {
+    display: table;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.detail {
+    font-size: 20px;
+    color: aliceblue;
+}
+
+.col-md-9 {
+    color: white;
+    padding-left: 1em;
+    font-size: 1.1em;
+    font-weight: 600;
+    text-shadow: 1px 1px rgb(48, 48, 48);
+}
+
+.Team {
+    display: table;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 0;
+    font-weight: 800;
+    font-size: 50px;
+    color: rgb(16, 41, 150);
+    text-shadow: 2px 2px white;
+}
+
+a {
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 16px;
+    margin-left: 1em;
+    font-weight: 600;
+}
+
+a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.previous {
+    background-color: #f1f1f1;
+    color: black;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    /* Remove scrollbar space */
+    background: transparent;
+    /* Optional: just make scrollbar invisible */
+}
+
+.search {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.teambutton {
+    display: inline-block;
+}
+
+.Team1 {
+    background-image: url('../../assets/cricket.jpg');
+    height: 11em;
+    width: 80%;
+    background-size: 100% 110%;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    margin-top: 2em;
+    box-shadow: inset -350px 0 50px 0px rgb(32, 68, 167);
+}
+
+.Team2 {
+    background-image: url('../../assets/football1.jpg');
+    height: 11em;
+    width: 80%;
+    background-size: 100% 120%;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    margin-top: 2em;
+    box-shadow: inset -350px 0 50px 0px rgb(32, 68, 167);
+}
+
+.Team3 {
+    background-image: url('../../assets/rugby.jpg');
+    height: 11em;
+    width: 80%;
+    background-size: 100% 120%;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    margin-top: 2em;
+    box-shadow: inset -350px 0 50px 0px rgb(32, 68, 167);
+}
+
+.Left1 {
+    width: 50%;
+    float: left;
+}
+
+.Right1 {
+    width: 50%;
+    float: right;
+}
+
+.cricketname {
+    padding-left: 2em;
+    padding-top: 1em;
+    font-size: 3em;
+    font-weight: 700;
+    color: rgb(12, 72, 114);
+    text-shadow: 2px 2px #fcfcfc;
+}
+
+.footballname {
+    padding-left: 2em;
+    padding-top: 1em;
+    font-size: 3em;
+    font-weight: 700;
+    color: white;
+    text-shadow: 5px 5px #000000;
+}
+
+.Details {
+    font-weight: 800;
+    color: rgb(255, 255, 255);
+    padding-top: 0.1em;
+    font-size: 1.2em;
+    padding-left: 40%;
+    font-style: italic;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-shadow: 2px 2px #000000;
+}
+
+//numbers
+.large_numbering {
+    padding: 0.2em;
+    font-size: 80px;
+    font-weight: bold;
+    vertical-align: middle;
+    color: aliceblue;
+}
+
+.some_heading {
+    color: #ffffff;
+    font-size: 28px;
+    margin-left: 20px;
+    text-shadow: 2px 2px #000000;
+}
+
+.holder {
+    height: 90px;
+    line-height: 50px;
+    background-color: rgb(7, 7, 102);
+}
+
+//coach
+.cricketcoach {
+    background-image: url('../../assets/cricketcoache.jpg');
+    height: 4em;
+    width: 80%;
+    background-size: 70% 100%;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    margin-top: 2em;
+    box-shadow: inset -400px 0 50px 0px rgb(32, 68, 167);
+}
+
+.footballcoach {
+    background-image: url('../../assets/footballcoach.jpg');
+    height: 4em;
+    width: 80%;
+    background-size: 80% 120%;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    margin-top: 2em;
+    box-shadow: inset -400px 0 50px 0px rgb(32, 68, 167);
+}
+
+.rugbycoach {
+    background-image: url('../../assets/rugbycoach.webp');
+    height: 4em;
+    width: 80%;
+    background-size: 80% 120%;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    margin-top: 2em;
+    box-shadow: inset -400px 0 50px 0px rgb(32, 68, 167);
+}
+
+.Left2 {
+    width: 50%;
+    float: left;
+}
+
+.Right2 {
+    width: 50%;
+    float: right;
+}
+
+.coachdetails {
+    font-weight: 800;
+    color: rgb(255, 255, 255);
+    padding-top: 1em;
+    font-size: 1.2em;
+    padding-left: 40%;
+    font-style: italic;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-shadow: 2px 2px #000000;
+}
+
+.coachname {
+    padding-left: 2em;
+    padding-top: 0.5em;
+    font-size: 2.5em;
+    font-weight: 700;
+    color: rgb(255, 255, 255);
+    text-shadow: 2px 2px #000000;
+}
+
+//player
+.playermale {
+    background-image: url('../../assets/allplayer.jpg');
+    height: 4em;
+    width: 80%;
+    background-size: 60% 100%;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    margin-top: 2em;
+    box-shadow: inset -450px 0 50px 0px rgb(32, 68, 167);
+}
+
+.playerfemale {
+    background-image: url('../../assets/female-player.png');
+    height: 4em;
+    width: 80%;
+    background-size: 60% 100%;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    margin-top: 2em;
+    box-shadow: inset -450px 0 50px 0px rgb(32, 68, 167);
+}
+
+.Left3 {
+    width: 40%;
+    float: left;
+}
+
+.Right3 {
+    width: 60%;
+    float: right;
+}
+
+.playername {
+    padding-left: 1em;
+    font-size: 2.5em;
+    font-weight: 700;
+    color: rgb(255, 255, 255);
+    text-shadow: 2px 2px #000000;
+}
+
+.playerdetails {
+    font-weight: 800;
+    color: rgb(255, 255, 255);
+    padding-top: 0.5em;
+    font-size: 1.3em;
+    padding-left: 40%;
+    font-style: italic;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-shadow: 2px 2px #000000;
+}
+
+.login-page {
+    padding: 1% 0 0;
+    margin: auto;
+}
+
+.form {
+    position: relative;
+    z-index: 1;
+    background: #ffffff;
+    padding: 45px;
+    text-align: left;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+body {
+    background-image: linear-gradient(rgb(41, 189, 194), rgb(50, 48, 206));
+}
+
+.modal-dialog {
+    width: 100%;
+}
+
+select option {
+    font-size: 1.5em;
+    margin: 2em;
+}
+
+.login-page {
+    padding: 1% 0 0;
+    margin: auto;
+}
+
+.form {
+    position: relative;
+    z-index: 1;
+    background: #ffffff;
+    padding: 45px;
+    text-align: left;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+body {
+    background-image: linear-gradient(rgb(41, 189, 194), rgb(50, 48, 206));
+}
+
+.modal-dialog {
+    width: 100%;
+}
+
+.mystyle {
+    background-color: rgb(3, 3, 148);
+    color: white;
+}

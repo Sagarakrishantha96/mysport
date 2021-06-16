@@ -1,0 +1,513 @@
+<div style="width: 100%; overflow: hidden;">
+    <div class="Left">
+        <br>
+        <a (click)="back()" class="previous round pointer">&#8249; Back</a>
+        <div class="aaa" style="padding-right: 0.3em;padding-top: 0.4em;">
+            <ul class="nav nav-pills mb-3 mainnav" id="pills-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="Team-tab" data-toggle="pill" href="#Team" role="tab" aria-controls="Team" aria-selected="true">
+                        <h5 class="navtitle">Teams</h5>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="Coach-tab" data-toggle="pill" href="#Coach" role="tab" aria-controls="Coach" aria-selected="false">
+                        <h5>Achievements</h5>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="Strengths-tab" data-toggle="pill" href="#Strengths" role="tab" aria-controls="Strengths" aria-selected="false">
+                        <h5>Strengths</h5>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="weaknesses-tab" data-toggle="pill" href="#weaknesses" role="tab" aria-controls="weaknesses" aria-selected="false">
+                        <h5>Weaknesses</h5>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="fixture-tab" data-toggle="pill" href="#fixture" role="tab" aria-controls="fixture" aria-selected="false">
+                        <h5>Fixtures</h5>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="Parents-tab" data-toggle="pill" href="#Parents" role="tab" aria-controls="Parents" aria-selected="false">
+                        <h5>Parents</h5>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tab-content" id="pills-tabContent">
+
+            <div class="tab-pane fade show active" id="Team" role="tabpanel" aria-labelledby="Team-tab">
+
+                <div style="height: 600px; overflow: auto;">
+                    <div style="padding-bottom: 2em;">
+                        <div *ngFor="let e of PlayerTeams" (click)="navigateTeam(e.teamId)" class="pointer" [class.Team1]="checkcricket(e.sportName)" [class.Team2]="checkfootballe(e.sportName)" [class.Team3]="checkrugby(e.sportName)">
+                            <div class="Left1">
+                                <div [class.cricketname]="checkcricket(e.sportName)" [class.footballname]="checkfootballe(e.sportName)" [class.footballname]="checkrugby(e.sportName)">{{e.teamName}}
+                                </div>
+                            </div>
+                            <div class="Right1">
+                                <div class="Details">
+                                    <div>▫ {{e.sportName}}</div>
+                                    <div>▫ {{e.strutureName}}</div>
+                                    <div>▫ Coach {{e.coachFName}}</div>
+                                    <div>▫ Wins-{{e.teamWins}}</div>
+                                    <div>▫ Losses-{{e.teamLoss}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+
+            </div>
+
+            <div class="tab-pane fade" id="Coach" role="tabpanel" aria-labelledby="Coach-tab">
+                <div class="aaa" *ngIf="achiveshow()">
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#achieve">Add
+                        Achievements</button>
+                </div>
+
+                <div style="height: 500px; overflow: auto;padding-top: 1.5em;">
+                    <div *ngFor="let p of Achievements">
+                        <div class="achievement">
+                            <div class="content">
+                                <div>{{p.playerAchievements}}&nbsp;&nbsp;<i (click)="deleteAchieve(p.playerAchieveId)" style="font-size: 0.8em;" class="fa fa-trash pointer"></i>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="Strengths" role="tabpanel" aria-labelledby="Strengths-tab">
+                <div class="aaa" *ngIf="achiveshow()">
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#strengths">Add
+                        Strengths</button>
+                </div>
+
+                <div style="height: 500px; overflow: auto;padding-top: 1.5em;">
+                    <div *ngFor="let p of Strengths">
+                        <div class="achievement">
+                            <div class="content">
+                                <div>{{p.playerStrengths}}&nbsp;&nbsp;<i (click)="deleteStrengths(p.strengthId)" style="font-size: 0.8em;" class="fa fa-trash pointer"></i>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="weaknesses" role="tabpanel" aria-labelledby="weaknesses-tab">
+                <div class="aaa" *ngIf="achiveshow()">
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#weaknes">Add
+                        Weaknesses</button>
+                </div>
+
+                <div style="height: 500px; overflow: auto;padding-top: 1.5em;">
+                    <div *ngFor="let p of Weaknesses">
+                        <div class="achievement">
+                            <div class="content">
+                                <div>{{p.playerWeaknesses}}&nbsp;&nbsp;<i (click)="deleteWeakness(p.weaknessesId)" style="font-size: 0.8em;" class="fa fa-trash pointer"></i>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="fixture" role="tabpanel" aria-labelledby="fixture-tab">
+
+                <div class="col-md-4 aaa">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a style="color: rgb(13, 52, 179);font-size: 16px;" class="nav-link active" id="upcoming-tab" data-toggle="tab" href="#upcoming" role="tab" aria-controls="upcoming" aria-selected="true">Upcoming</a>
+                        </li>
+                        <li class="nav-item">
+                            <a style="color: rgb(13, 52, 179);font-size: 16px;" class="nav-link" id="ongoing-tab" data-toggle="tab" href="#ongoing" role="tab" aria-controls="ongoing" aria-selected="false">Ongoing</a>
+                        </li>
+                        <li class="nav-item">
+                            <a style="color: rgb(13, 52, 179);font-size: 16px;" class="nav-link" id="finished-tab" data-toggle="tab" href="#finished" role="tab" aria-controls="finished" aria-selected="false">Finished</a>
+                        </li>
+                    </ul>
+                </div><br>
+
+                <div class="aaa">
+                    <i class="fa fa-search" style="color: blanchedalmond;font-size: 1.5em;"></i>&nbsp;&nbsp;
+                    <div class="search">
+                        <input class="form-control" type="text" name="search" [(ngModel)]="searchFixture" autocomplete="off" placeholder="Search any">
+                    </div>
+                    <div class="teambutton">
+                        <button type="button" (click)="searchFixture=''" class="btn btn-warning">Clear</button>&nbsp;
+                    </div>
+                </div>
+
+                <div style="height: 500px; overflow: auto;padding-top: 1.5em;">
+                    <div class="tab-content profile-tab" id="myTabContent">
+                        <div class="tab-pane fade show active" id="upcoming" role="tabpanel" aria-labelledby="upcoming-tab">
+                            <table class="table table-hover table-bordered ">
+                                <thead class="thead-dark">
+                                    <tr style="height: 1em;">
+                                        <th scope="col">Tournament</th>
+                                        <th scope="col">Match</th>
+                                        <th scope="col">Time</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Venue</th>
+                                        <th scope="col">Availability</th>
+                                        <th scope="col">Reason</th>
+                                        <th scope="col">Confirmed</th>
+                                        <th *ngIf="confirm()"></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="body">
+                                    <tr *ngFor="let p of Fixtures | filter:searchFixture">
+                                        <td>{{p.tournamentName}}</td>
+                                        <td>{{p.instituteone}} vs {{p.institutetwo}}</td>
+                                        <td>{{p.fixtureTime.substring(0,5)}}</td>
+                                        <td>{{p.fixtureDate | date:'mediumDate'}}</td>
+                                        <td>{{p.venue}}</td>
+                                        <td>{{p.fixtureAvaial}}</td>
+                                        <td>{{p.AvaialReason}}</td>
+                                        <td>{{p.Confirm}}</td>
+                                        <td *ngIf="confirm()"><button (click)="changeavailability(p.fixtureId,p.tournamentTeamId)" type="button" class="btn btn-info aaa">Confirm</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="ongoing" role="tabpanel" aria-labelledby="ongoing-tab">
+                            <table class="table table-hover table-bordered ">
+                                <thead class="thead-dark">
+                                    <tr style="height: 1em;">
+                                        <th scope="col">Tournament</th>
+                                        <th scope="col">Match</th>
+                                        <th scope="col">Time</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Venue</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="body">
+                                    <tr *ngFor="let p of OngoingFixtures | filter:searchFixture" [routerLink]="['/ongoing',p.fixtureId[0]]" class="pointer">
+                                        <td>{{p.tournamentName}}</td>
+                                        <td>{{p.instituteone}} vs {{p.institutetwo}}</td>
+                                        <td>{{p.fixtureTime.substring(0,5)}}</td>
+                                        <td>{{p.fixtureDate | date:'mediumDate'}}</td>
+                                        <td>{{p.venue}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="finished" role="tabpanel" aria-labelledby="finished-tab">
+                            <table class="table table-hover table-bordered ">
+                                <thead class="thead-dark">
+                                    <tr style="height: 1em;">
+                                        <th scope="col">Tournament</th>
+                                        <th scope="col">Match</th>
+                                        <th scope="col">Time</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Venue</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="body">
+                                    <tr *ngFor="let p of FinishedFixtures | filter:searchFixture" [routerLink]="['/ongoing',p.fixtureId[0]]" class="pointer">
+                                        <td>{{p.tournamentName}}</td>
+                                        <td>{{p.instituteone}} vs {{p.institutetwo}}</td>
+                                        <td>{{p.fixtureTime.substring(0,5)}}</td>
+                                        <td>{{p.fixtureDate | date:'mediumDate'}}</td>
+                                        <td>{{p.venue}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="Parents" role="tabpanel" aria-labelledby="Parents-tab">
+                <div style="height: 500px; overflow: auto;padding-top: 1.5em;">
+                    <table class="table table-hover table-bordered ">
+                        <thead class="thead-dark">
+                            <tr style="height: 1em;">
+                                <th scope="col">Name</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Tele No</th>
+                                <th scope="col">Type</th>
+                            </tr>
+                        </thead>
+                        <tbody class="body">
+                            <tr *ngFor="let p of Parents">
+                                <td>{{p.parentFName}} {{p.parentLName}}</td>
+                                <td>{{p.parentAddress}}</td>
+                                <td>{{p.ParentteleNum}}</td>
+                                <td>{{p.Parenttype}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="Right">
+        <div class="blur">
+            <div class="Team">
+                <p></p>
+            </div>
+
+            <div class="menu">
+                <button type="button" class="btn btn-danger aaa" data-toggle="modal" data-target="#exampleModalCenter">Change
+                    Password</button><br>
+            </div><br>
+            <div class="aaa"><span class="presentage1">Practice Sessions Attendance : </span><span class="presentage2"><span class="presentage3">{{attendance}}%</span></span>
+            </div>
+            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">
+                <i class="fa fa-edit pointer" style="font-size:26px;"></i><br>
+            </button>&nbsp;&nbsp;
+
+            <button type="button" class="btn btn-danger" (click)="deletePlayer()">
+                <i style="font-size: 1.2em;" class="fa fa-trash pointer"></i>
+            </button>
+
+            <div class="details">
+                <p><span class="title">Name : </span><span class="teamvalue">{{PlayerProfile[0]?.playerFName}}
+                        {{PlayerProfile[0]?.playerLName}}</span></p>
+                <p><span class="title">Address : </span><span class="teamvalue">{{PlayerProfile[0]?.playerAddress}}</span></p>
+                <p><span class="title">Telephone No : </span><span class="teamvalue">{{PlayerProfile[0]?.playerteleNum}}</span></p>
+                <p><span class="title">Date of Birth : </span><span class="teamvalue">{{PlayerProfile[0]?.playerDOB |
+                        date:'mediumDate'}}</span></p>
+                <p><span class="title">Gender : </span><span class="teamvalue">{{PlayerProfile[0]?.playerGender}}</span>
+                </p>
+                <p><span class="title">Height : </span><span class="teamvalue">{{PlayerProfile[0]?.playerHeight}}</span>
+                </p>
+                <p><span class="title">Weight : </span><span class="teamvalue">{{PlayerProfile[0]?.playerWeight}}</span>
+                </p>
+                <p><span class="title">Blood Group : </span><span class="teamvalue">{{PlayerProfile[0]?.playerBloodGroup}}</span></p>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="achieve" tabindex="-1" role="dialog" aria-labelledby="achieveTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Add Achievement</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose2>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="achieve" (ngSubmit)="achieveSubmit()">
+                    <div class="form-group">
+                        <textarea [class.is-invalid]="achieve.get('achievecontent').invalid && achieve.get('achievecontent').touched" formControlName="achievecontent" class="form-control form-control-lg" id="curachievecontent" rows="4" cols="50"></textarea>
+                        <small [class.d-none]="achieve.get('achievecontent').valid || achieve.get('achievecontent').untouched" class="text-danger">Achievement is required</small>
+                    </div><br>
+                    <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
+                    <button [disabled]="achieve.invalid" type="submit" class="btn btn-primary">Submit</button>&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" #myModalClose>Close</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="strengths" tabindex="-1" role="dialog" aria-labelledby="strengthsTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Add Strengths</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose4>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="strength" (ngSubmit)="strengthsSubmit()">
+                    <div class="form-group">
+                        <textarea [class.is-invalid]="strength.get('playerStrengths').invalid && strength.get('playerStrengths').touched" formControlName="playerStrengths" class="form-control form-control-lg" id="playerStrengths" rows="4" cols="50"></textarea>
+                        <small [class.d-none]="strength.get('playerStrengths').valid || strength.get('playerStrengths').untouched" class="text-danger">Achievement is required</small>
+                    </div><br>
+                    <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
+                    <button [disabled]="strength.invalid" type="submit" class="btn btn-primary">Submit</button>&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" #myModalClose>Close</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="weaknes" tabindex="-1" role="dialog" aria-labelledby="weaknesTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Add Weaknesses</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose5>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="weaknesses" (ngSubmit)="weaknessesSubmit()">
+                    <div class="form-group">
+                        <textarea [class.is-invalid]="weaknesses.get('playerWeaknesses').invalid && weaknesses.get('playerWeaknesses').touched" formControlName="playerWeaknesses" class="form-control form-control-lg" id="playerWeaknesses" rows="4" cols="50"></textarea>
+                        <small [class.d-none]="weaknesses.get('playerWeaknesses').valid || weaknesses.get('playerWeaknesses').untouched" class="text-danger">Achievement is required</small>
+                    </div><br>
+                    <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
+                    <button [disabled]="weaknesses.invalid" type="submit" class="btn btn-primary">Submit</button>&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" #myModalClose>Close</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="display: none;">
+                <h5 class="modal-title" id="exampleModalLongTitle">Change Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose6>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="login-page">
+                    <div class="form">
+                        <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+                            <div class="form-group">
+                                <label for="signupPassword1">Enter new password</label>
+                                <input [class.is-invalid]="password.invalid && password.touched" formControlName="password" type="password" class="form-control form-control-lg" id="signupPassword1" required aria-describedby="passwordHelpsignup" required>
+
+                                <div *ngIf="password.invalid && password.touched;else elseBlock2">
+                                    <small *ngIf="password.errors?.required" class="text-danger">Password is
+                                        required</small>
+                                    <small *ngIf="password.errors?.minlength|| password.errors?.maxlength" class="text-danger">Your password must
+                                        be 8-20 characters long<br></small>
+                                    <small *ngIf="password.errors?.pattern" class="text-danger">must not contain spaces,
+                                        special characters, or
+                                        emoji</small>
+                                </div>
+                                <ng-template #elseBlock2>
+                                    <small id="passwordHelpsignup" class="form-text text-muted">
+                                        Your password must be 8-20 characters long, contain letters and numbers, and
+                                        must not contain spaces,
+                                        special characters, or emoji.
+                                    </small>
+                                </ng-template>
+                            </div>
+                            <div class="form-group">
+                                <label for="signupPassword2">Re-enter Password</label>
+                                <input [class.is-invalid]="registrationForm.errors?.misMatch" formControlName="confirmPassword" type="password" class="form-control form-control-lg" id="signupPassword2" required>
+
+                                <small class="text-danger" *ngIf="registrationForm.errors?.misMatch">Password do not
+                                    match</small>
+                            </div><br>
+                            <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
+                            <button [disabled]="registrationForm.invalid" type="submit" class="btn btn-primary">Change</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="display: none;">
+                <h5 class="modal-title" id="exampleModalLongTitle">Edit Profile</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose1>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="login-page">
+                    <div class="form">
+                        <form [formGroup]="playerRegistration1" (ngSubmit)="playerSubmit()">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="firstNamePlayer">First Name</label>
+                                    <input [class.is-invalid]="firstNamePlayer.touched && firstNamePlayer.invalid" formControlName="firstNamePlayer" type="text" class="form-control form-control-lg" id="firstNamePlayer" placeholder="{{PlayerProfile[0]?.playerFName}}">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="secondNamePlayer">Last Name</label>
+                                    <input [class.is-invalid]="secondNamePlayer.touched && secondNamePlayer.invalid" formControlName="secondNamePlayer" type="text" class="form-control form-control-lg" id="secondNamePlayer" placeholder="{{PlayerProfile[0]?.playerLName}}">
+                                </div>
+                                <div *ngIf="(firstNamePlayer.touched && firstNamePlayer.invalid) || secondNamePlayer.invalid && secondNamePlayer.touched">
+                                    <small class="text-danger">First name and last name reuired and must contain more
+                                        than 3 charactors<br></small>
+                                </div>
+                            </div><br>
+                            <div class="form-group">
+                                <label for="perAddressPlayer">Address</label>
+                                <input [class.is-invalid]="playerRegistration1.get('perAddressPlayer').invalid && playerRegistration1.get('perAddressPlayer').touched" formControlName="perAddressPlayer" type="text" class="form-control form-control-lg" id="perAddressPlayer" placeholder="{{PlayerProfile[0]?.playerAddress}}">
+                                <small [class.d-none]="playerRegistration1.get('perAddressPlayer').valid || playerRegistration1.get('perAddressPlayer').untouched" class="text-danger">Permenent address required</small>
+                            </div><br>
+                            <div class="form-group">
+                                <label for="teleNoPlayer">Telephone Number</label>
+                                <input [class.is-invalid]="teleNoPlayer.invalid && teleNoPlayer.touched" formControlName="teleNoPlayer" type="tel" class="form-control form-control-lg" id="teleNoPlayer" placeholder="{{PlayerProfile[0]?.playerteleNum}}">
+
+                                <div *ngIf="teleNoPlayer.invalid && teleNoPlayer.touched">
+                                    <small *ngIf="teleNoPlayer.errors?.required" class="text-danger">Telephone number
+                                        required</small>
+                                    <small *ngIf="teleNoPlayer.errors?.pattern" class="text-danger">Invalid telephone
+                                        number</small>
+                                </div>
+                            </div><br>
+                            <div class="form-group">
+                                <label for="bloodSelect">Blood Group</label>
+                                <select [class.is-invalid]="playerRegistration1.get('bloodSelect').invalid && playerRegistration1.get('bloodSelect').touched" formControlName="bloodSelect" class="form-control" id="bloodSelect">
+                                    <option>A+</option>
+                                    <option>A-</option>
+                                    <option>B+</option>
+                                    <option>B-</option>
+                                    <option>AB+</option>
+                                    <option>AB-</option>
+                                    <option>O+</option>
+                                    <option>O-</option>
+                                </select>
+                                <small [class.d-none]="playerRegistration1.get('bloodSelect').valid || playerRegistration1.get('bloodSelect').untouched" class="text-danger">Required blood group</small>
+                            </div><br>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label" for="heightPlayer">
+                                    Height</label>&nbsp;&nbsp;
+                                <input formControlName="heightPlayer" type="number" name="height" id="heightPlayer" step="1" min="0">cm
+                            </div>
+                            <small [class.d-none]="playerRegistration1.get('heightPlayer').valid || playerRegistration1.get('heightPlayer').untouched" class="text-danger"><br>Height required</small>
+                            <br><br>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label" for="weightPlayer">
+                                    Weight</label>&nbsp;&nbsp;
+                                <input formControlName="weightPlayer" type="number" name="height" id="weightPlayer" step="0.01" min="0">Kg
+                            </div>
+                            <small [class.d-none]="playerRegistration1.get('weightPlayer').valid || playerRegistration1.get('weightPlayer').untouched" class="text-danger"><br>Weight required</small>
+                            <br><br>
+
+                            <div class="form-group">
+                                <label for="PlayerStructure">Team Structure</label>
+                                <select [class.is-invalid]="playerRegistration1.get('PlayerStructure').invalid && playerRegistration1.get('PlayerStructure').touched" formControlName="PlayerStructure" class="form-control" id="exampleFormControlSelect1">
+                                    <option class="option" *ngFor="let st of Structures" [value]=st.strutureId>
+                                        {{st.strutureName}}</option>
+                                </select>
+                                <small class="text-danger">After changing structure player will remove from all
+                                    teams</small>
+                            </div><br>
+
+                            <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
+                            <button (click)="close()" type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

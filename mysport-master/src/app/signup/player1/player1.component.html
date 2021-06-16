@@ -1,0 +1,84 @@
+<div id="login-page">
+    <div class="form">
+        <form [formGroup]="playerRegistration1" (ngSubmit)="playerSubmit()">
+            <h3>Enter your details</h3><br>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="firstNamePlayer">First Name</label>
+                    <input [class.is-invalid]="firstNamePlayer.touched && firstNamePlayer.invalid" formControlName="firstNamePlayer" type="text" class="form-control form-control-lg" id="firstNamePlayer" required placeholder="First name">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="secondNamePlayer">Last Name</label>
+                    <input [class.is-invalid]="secondNamePlayer.touched && secondNamePlayer.invalid" formControlName="secondNamePlayer" type="text" class="form-control form-control-lg" id="secondNamePlayer" required placeholder="Last name">
+                </div>
+
+                <div *ngIf="(firstNamePlayer.touched && firstNamePlayer.invalid) || secondNamePlayer.invalid && secondNamePlayer.touched">
+                    <small class="text-danger">First name and last name reuired and must contain more than 3
+                        charactors<br></small>
+                </div>
+            </div><br>
+
+            <div class="form-group">
+                <label for="perAddressPlayer">Address</label>
+                <input [class.is-invalid]="playerRegistration1.get('perAddressPlayer').invalid && playerRegistration1.get('perAddressPlayer').touched" formControlName="perAddressPlayer" type="text" class="form-control form-control-lg" id="perAddressPlayer" required placeholder="1234 Main St">
+                <small [class.d-none]="playerRegistration1.get('perAddressPlayer').valid || playerRegistration1.get('perAddressPlayer').untouched" class="text-danger">Permenent address required</small>
+            </div><br>
+
+            <div class="form-group">
+                <label for="teleNoPlayer">Telephone Number</label>
+                <input [class.is-invalid]="teleNoPlayer.invalid && teleNoPlayer.touched" formControlName="teleNoPlayer" type="tel" class="form-control form-control-lg" id="teleNoPlayer" placeholder="+94 71 2345678" required>
+
+                <div *ngIf="teleNoPlayer.invalid && teleNoPlayer.touched">
+                    <small *ngIf="teleNoPlayer.errors?.required" class="text-danger">Telephone number required</small>
+                    <small *ngIf="teleNoPlayer.errors?.pattern" class="text-danger">Invalid telephone number</small>
+                </div>
+
+            </div><br>
+
+            <div class="form-group">
+                <label for="dobpPlayer">Date of birth</label>
+                <input [class.is-invalid]="playerRegistration1.get('dobpPlayer').invalid && playerRegistration1.get('dobpPlayer').touched" formControlName="dobpPlayer" type="date" class="form-control form-control-lg" id="dobpPlayer">
+                <small [class.d-none]="playerRegistration1.get('dobpPlayer').valid || playerRegistration1.get('dobpPlayer').untouched" class="text-danger">Date of birth required</small>
+            </div><br>
+
+            <div class="form-check form-check-inline">
+                <input formControlName="MFplayer" class="form-check-input" type="radio" name="MFplayer" id="maleplayer" value="male" required>
+                <label class="form-check-label" for="maleplayer">Male</label>
+            </div>&nbsp;
+            <div class="form-check form-check-inline">
+                <input formControlName="MFplayer" class="form-check-input" type="radio" name="MFplayer" id="femaleplayer" value="female" required>
+                <label class="form-check-label" for="femaleplayer">female</label>
+            </div>
+            <div *ngIf="playerRegistration1.get('MFplayer').errors?.required" class="text-danger">
+                <small>required</small>
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label for="PlayerStructure">Team Structure</label>
+                <select [class.is-invalid]="playerRegistration1.get('PlayerStructure').invalid && playerRegistration1.get('PlayerStructure').touched" formControlName="PlayerStructure" class="form-control" id="exampleFormControlSelect1">
+                    <option class="option" *ngFor="let st of Structures" [value]=st.strutureId>{{st.strutureName}}
+                    </option>
+                </select>
+                <small [class.d-none]="playerRegistration1.get('PlayerStructure').valid || playerRegistration1.get('PlayerStructure').untouched" class="text-danger">Required</small>
+            </div><br>
+            <div class="form-group">
+                <label for="PlayerInstitute">Select Institute</label>
+                <select [class.is-invalid]="playerRegistration1.get('PlayerInstitute').invalid && playerRegistration1.get('PlayerInstitute').touched" formControlName="PlayerInstitute" class="form-control" id="exampleFormControlSelect1">
+                    <option class="option" *ngFor="let st of Institutes" [value]=st.instituteId>{{st.instituteName}}
+                    </option>
+                </select>
+                <small [class.d-none]="playerRegistration1.get('PlayerInstitute').valid || playerRegistration1.get('PlayerInstitute').untouched" class="text-danger">Required</small>
+            </div><br>
+
+            <div class="form-group">
+                <label for="SecretCode">Secret Code</label>
+                <input [class.is-invalid]="playerRegistration1.get('SecretCode').invalid && playerRegistration1.get('SecretCode').touched" formControlName="SecretCode" type="text" class="form-control form-control-lg" id="SecretCode" required placeholder="xxx000000">
+                <small [class.d-none]="playerRegistration1.get('SecretCode').valid || playerRegistration1.get('SecretCode').untouched" class="text-danger">Secret key is wrong</small>
+            </div><br>
+
+            <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
+            <button [disabled]="playerRegistration1.invalid" type="submit" class="btn btn-primary">Next</button>
+        </form>
+    </div>
+</div>

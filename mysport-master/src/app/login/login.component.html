@@ -1,0 +1,85 @@
+<div id="login-page">
+    <div class="form">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="mainemail"><b>Email address</b></label>
+                <input [class.is-invalid]="loginForm.get('userEmail').invalid && loginForm.get('userEmail').touched" formControlName="userEmail" type="email" class="form-control form-control-lg" id="mainemail" aria-describedby="emailHelpmain" placeholder="name@example.com"
+                    required>
+
+                <div *ngIf="loginForm.get('userEmail').invalid && loginForm.get('userEmail').touched;else elseBlock11">
+                    <small *ngIf="loginForm.get('userEmail').errors?.required" class="text-danger">Email is
+                        required</small>
+                    <small *ngIf="loginForm.get('userEmail').errors?.email" class="text-danger">Must be email
+                        type</small>
+                </div>
+                <ng-template #elseBlock11>
+                    <small id="signupemailHelp" class="form-text text-muted">We'll never share your email with anyone
+                        else.</small>
+                </ng-template>
+
+            </div>
+            <div class="form-group">
+                <label for="mainPassword1"><b>Enter password</b></label>
+                <input [class.is-invalid]="loginForm.get('password').invalid && loginForm.get('password').touched" formControlName="password" type="password" class="form-control form-control-lg" id="mainPassword1" required aria-describedby="passwordHelpmain">
+
+                <div *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched;else elseBlock22">
+                    <small *ngIf="loginForm.get('password').errors?.required" class="text-danger">Password is
+                        required</small>
+                    <small *ngIf="loginForm.get('password').errors?.minlength|| password.errors?.maxlength" class="text-danger">Your password must be 8-20 characters long<br></small>
+                    <small *ngIf="loginForm.get('password').errors?.pattern" class="text-danger">must not contain
+                        spaces,
+                        special characters, or emoji</small>
+                </div>
+
+                <ng-template #elseBlock22>
+                    <small id="passwordHelpsignup" class="form-text text-muted">
+                        Your password must be 8-20 characters long, contain letters and numbers, and must not contain
+                        spaces,
+                        special characters, or emoji.
+                    </small>
+                </ng-template>
+
+            </div><br>
+            <div class="form-group">
+                <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
+                <button [disabled]="loginForm.invalid" type="submit" class="btn btn-primary">Submit</button><br><br>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Reset
+                    Password</button>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Reset Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="loginForm" (ngSubmit)="changepassword()">
+                    <div class="form-group">
+                        Enter your email address to reset your password. New password will be sent to your email.
+                        <br><br>
+                        <label for="mainemail"><b>Email address</b></label>
+                        <input [class.is-invalid]="loginForm.get('userEmail').invalid && loginForm.get('userEmail').touched" formControlName="userEmail" type="email" class="form-control form-control-lg" id="mainemail" aria-describedby="emailHelpmain" placeholder="name@example.com"
+                            required>
+
+                        <div *ngIf="loginForm.get('userEmail').invalid && loginForm.get('userEmail').touched">
+                            <small *ngIf="loginForm.get('userEmail').errors?.required" class="text-danger">Email is
+                                required</small>
+                            <small *ngIf="loginForm.get('userEmail').errors?.email" class="text-danger">Must be email
+                                type</small>
+                        </div><br>
+                        <button [disabled]="loginForm.value.userEmail==''" type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

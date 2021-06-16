@@ -1,0 +1,169 @@
+<div style="width: 100%; overflow: hidden;">
+
+    <div class="Left"><br>
+        <a routerLink="/home" class="previous round">&#8249; Back</a>
+        <div class="aaa" style="font-size: 2em;font-weight: 700;">Players</div><br>
+        <div style="height: 500px; overflow: auto;">
+            <div style="padding-bottom: 1em;">
+                <div *ngFor="let p of Players" [routerLink]="['/playerProfile',p.userId]" [class.playermale]="checkmale(p.playerGender)" [class.playerfemale]="checkfemale(p.playerGender)" class="pointer">
+                    <div class="Left3">
+                        <div class="playername">{{p.playerFName}}<br> {{p.playerLName}}</div>
+                    </div>
+                    <div class="Right3">
+                        <div class="playerdetails">
+                            <div>▫ {{p.playerGender}}</div>
+                            <div>▫ {{p.playerteleNum}}</div>
+                            <div>▫ {{p.playerAddress}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
+
+    <div class="Right">
+        <div class="blur">
+            <br>
+
+            <div class="menu">
+                <button type="button" class="btn btn-danger aaa" data-toggle="modal" data-target=".bd-example-modal-lg">Edit
+                Profile</button><br>
+                <button type="button" class="btn btn-danger aaa" data-toggle="modal" data-target="#exampleModalCenter">Change
+                Password</button>
+            </div><br>
+
+            <div class="details">
+                <p><span class="title">Name : </span><span class="teamvalue">{{ParentProfile[0]?.parentFName}} {{ParentProfile[0]?.parentLName}}</span></p>
+                <p><span class="title">Address : </span><span class="teamvalue">{{ParentProfile[0]?.parentAddress}}</span></p>
+                <p><span class="title">Telephone No : </span><span class="teamvalue">{{ParentProfile[0]?.ParentteleNum}}</span></p>
+                <p><span class="title">Type : </span><span class="teamvalue">{{ParentProfile[0]?.Parenttype}}</span></p>
+                <br>
+            </div>
+            <div class="form-group aaa">
+                <input [(ngModel)]="usercode" style="width: 200px;" type="text" class="form-control form-control-lg" id="Insertcode" placeholder="ply0000"><br>
+                <button (click)="addPlayer()" type="button" class="btn btn-primary aaa">Add Player</button>
+            </div><br><br>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="display: none;">
+                <h5 class="modal-title" id="exampleModalLongTitle">Change Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose3>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="login-page">
+                    <div class="form">
+                        <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+
+                            <div class="form-group">
+                                <label for="signupPassword1">Enter new password</label>
+                                <input [class.is-invalid]="password.invalid && password.touched" formControlName="password" type="password" class="form-control form-control-lg" id="signupPassword1" required aria-describedby="passwordHelpsignup" required>
+
+                                <div *ngIf="password.invalid && password.touched;else elseBlock2">
+                                    <small *ngIf="password.errors?.required" class="text-danger">Password is
+                                        required</small>
+                                    <small *ngIf="password.errors?.minlength|| password.errors?.maxlength" class="text-danger">Your password must
+                                        be 8-20 characters long<br></small>
+                                    <small *ngIf="password.errors?.pattern" class="text-danger">must not contain spaces,
+                                        special characters, or
+                                        emoji</small>
+                                </div>
+
+                                <ng-template #elseBlock2>
+                                    <small id="passwordHelpsignup" class="form-text text-muted">
+                                        Your password must be 8-20 characters long, contain letters and numbers, and
+                                        must not contain spaces,
+                                        special characters, or emoji.
+                                    </small>
+                                </ng-template>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="signupPassword2">Re-enter Password</label>
+                                <input [class.is-invalid]="registrationForm.errors?.misMatch" formControlName="confirmPassword" type="password" class="form-control form-control-lg" id="signupPassword2" required>
+
+                                <small class="text-danger" *ngIf="registrationForm.errors?.misMatch">Password do not
+                                    match</small>
+                            </div><br>
+
+                            <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
+                            <button (click)="close1()" [disabled]="registrationForm.invalid" type="submit" class="btn btn-primary">Change</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="display: none;">
+                <h5 class="modal-title" id="exampleModalLongTitle">Edit Profile</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose1>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="login-page">
+                    <div class="form">
+                        <form [formGroup]="parentRegistration" (ngSubmit)="parentSubmit()">
+                            <h3>Enter your details</h3><br>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="firstNameParent">First Name</label>
+                                    <input [class.is-invalid]="firstNameParent.invalid && firstNameParent.touched  " formControlName="firstNameParent" type="text" class="form-control form-control-lg" id="firstNameParent" placeholder="{{ParentProfile[0]?.parentFName}}">
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="secondNameParent">Last Name</label>
+                                    <input [class.is-invalid]="secondNameParent.invalid && secondNameParent.touched" formControlName="secondNameParent" type="text" class="form-control form-control-lg" id="secondNameParent" placeholder="{{ParentProfile[0]?.parentLName}}">
+                                </div>
+
+                                <div *ngIf="(firstNameParent.touched && firstNameParent.invalid) || secondNameParent.invalid && secondNameParent.touched">
+                                    <small class="text-danger">First name and last name reuired and must contain more
+                                        than 3
+                                        charactors<br></small>
+                                </div>
+
+                            </div><br>
+
+                            <div class="form-group">
+                                <label for="AddressParent">Address</label>
+                                <input [class.is-invalid]="parentRegistration.get('AddressParent').invalid && parentRegistration.get('AddressParent').touched" formControlName="AddressParent" type="text" class="form-control form-control-lg" id="AddressParent" placeholder="{{ParentProfile[0]?.parentAddress}}">
+                                <small [class.d-none]="parentRegistration.get('AddressParent').valid || parentRegistration.get('AddressParent').untouched" class="text-danger">Address required</small>
+                            </div><br>
+
+
+                            <div class="form-group">
+                                <label for="teleNoParent">Telephone Number</label>
+                                <input [class.is-invalid]="teleNoParent.invalid && teleNoParent.touched" formControlName="teleNoParent" type="tel" class="form-control form-control-lg" id="teleNoParent" placeholder="{{ParentProfile[0]?.ParentteleNum}}">
+
+                                <div *ngIf="teleNoParent.invalid && teleNoParent.touched">
+                                    <small *ngIf="teleNoParent.errors?.required" class="text-danger">Telephone number
+                                        required</small>
+                                    <small *ngIf="teleNoParent.errors?.pattern" class="text-danger">Invalid telephone
+                                        number</small>
+                                </div>
+                            </div><br>
+
+                            <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
+                            <button (click)="close()" type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

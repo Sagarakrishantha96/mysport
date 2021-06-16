@@ -1,0 +1,77 @@
+<br>
+<a routerLink="/adminpanel" class="previous round">&#8249; Back</a>
+<div id="coach-page">
+    <div class="form">
+        <form [formGroup]="CoachRegistration" (ngSubmit)="coachSubmit()">
+            <h3>Enter Coach details</h3><br>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="firstNameCoach">First Name</label>
+                    <input [class.is-invalid]="firstNameCoach.invalid && firstNameCoach.touched" formControlName="firstNameCoach" type="text" class="form-control form-control-lg" id="firstNameCoach" placeholder="First name">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="secondNameAdmin">Last Name</label>
+                    <input [class.is-invalid]="lastNameCoach.invalid && lastNameCoach.touched" formControlName="lastNameCoach" type="text" class="form-control form-control-lg" id="secondNameAdmin" placeholder="Last name">
+                </div>
+
+                <div *ngIf="(firstNameCoach.touched && firstNameCoach.invalid) || lastNameCoach.invalid && lastNameCoach.touched">
+                    <small class="text-danger">First name and last name reuired and must contain more than 3
+                        charactors<br></small>
+                </div>
+            </div><br>
+
+            <div class="form-group">
+                <label for="emailAddress">Email Address</label>
+                <input [class.is-invalid]="CoachRegistration.get('emailAddress').invalid && CoachRegistration.get('emailAddress').touched" formControlName="emailAddress" type="text" class="form-control form-control-lg" id="emailAddress" required placeholder="ABC@gmail.com">
+
+                <small [class.d-none]="CoachRegistration.get('emailAddress').valid || CoachRegistration.get('emailAddress').untouched" class="text-danger">Email address is required</small>
+            </div><br>
+
+            <div class="form-group">
+                <label for="curAddressAdmin">Current Address</label>
+                <input [class.is-invalid]="CoachRegistration.get('addressAdmin').invalid && CoachRegistration.get('addressAdmin').touched" formControlName="addressAdmin" type="text" class="form-control form-control-lg" id="curAddressAdmin" required placeholder="1234 Main St">
+
+                <small [class.d-none]="CoachRegistration.get('addressAdmin').valid || CoachRegistration.get('addressAdmin').untouched" class="text-danger">Address is required</small>
+            </div><br>
+
+
+            <div class="form-group">
+                <label for="teleNoCoach">Telephone Number</label>
+                <input [class.is-invalid]="teleNoCoach.invalid && teleNoCoach.touched" formControlName="teleNoCoach" type="tel" class="form-control form-control-lg" id="teleNoCoach" placeholder="+94 71 2345678">
+
+                <div *ngIf="teleNoCoach.invalid && teleNoCoach.touched">
+                    <small *ngIf="teleNoCoach.errors?.required" class="text-danger">Telephone number required</small>
+                    <small *ngIf="teleNoCoach.errors?.pattern" class="text-danger">Invalid telephone number</small>
+                </div>
+            </div><br>
+
+            <div class="form-group">
+                <label for="dobCoach">Date of birth</label>
+                <input [class.is-invalid]="CoachRegistration.get('dobCoach').invalid && CoachRegistration.get('dobCoach').touched" formControlName="dobCoach" type="date" class="form-control form-control-lg" id="dobCoach">
+                <small [class.d-none]="CoachRegistration.get('dobCoach').valid || CoachRegistration.get('dobCoach').untouched" class="text-danger">Date of birth required</small>
+            </div><br>
+
+            <div class="form-check form-check-inline">
+                <input formControlName="genderCoach" class="form-check-input" type="radio" name="genderCoach" id="maleAdmin" value="male" required>
+                <label class="form-check-label" for="maleAdmin">Male</label>
+            </div>&nbsp;
+            <div class="form-check form-check-inline">
+                <input formControlName="genderCoach" class="form-check-input" type="radio" name="genderCoach" id="femaleAdmin" value="female" required>
+                <label class="form-check-label" for="femaleAdmin">female</label>
+            </div><br>
+            <br>
+
+            <div class="form-group">
+                <label for="Sport">Sport</label>
+                <select [class.is-invalid]="CoachRegistration.get('Sport').invalid && CoachRegistration.get('Sport').touched" formControlName="Sport" class="form-control" id="exampleFormControlSelect1">
+                    <option class="option" *ngFor="let s of Sports" [value]=s.sportId>{{s.sportName}}</option>
+                </select>
+                <small [class.d-none]="CoachRegistration.get('Sport').valid || CoachRegistration.get('Sport').untouched" class="text-danger">Sport required</small>
+            </div><br>
+
+            <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
+            <button [disabled]="CoachRegistration.invalid" type="submit" class="btn btn-primary">Submit</button>
+
+        </form>
+    </div>
+</div>

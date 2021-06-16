@@ -1,0 +1,233 @@
+.name {
+    font-size: 2.5em;
+    color: rgb(33, 3, 145);
+    font-weight: 500;
+    margin-left: 50%;
+    display: table;
+    text-shadow: 2px 2px rgb(253, 253, 253);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.summery {
+    margin-top: 1.5em;
+    margin-right: 1em;
+}
+
+.topic {
+    font-weight: 600;
+    font-size: 1.5em;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.aaa {
+    display: table;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.table {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    table-layout: fixed;
+    border-width: 0.3em;
+    border-color: rgb(10, 10, 104);
+    background-color: white;
+}
+
+th,
+td {
+    padding: 25px;
+    border-width: 0.1em;
+    border-color: rgb(10, 10, 104);
+}
+
+td {
+    font-size: large;
+    font-weight: 600;
+}
+
+.body {
+    height: 1em;
+    overflow: auto;
+}
+
+.Left {
+    width: 90%;
+    float: left;
+}
+
+.Right {
+    width: 10%;
+    float: right;
+    height: 100%;
+}
+
+.btn {
+    font-size: 1.2em;
+    font-weight: 500;
+}
+
+.rotate230 {
+    -webkit-transform: rotate(230deg);
+    -moz-transform: rotate(230deg);
+    -o-transform: rotate(230deg);
+    -ms-transform: rotate(230deg);
+    transform: rotate(230deg);
+}
+
+.rotate30 {
+    -webkit-transform: rotate(40deg);
+    -moz-transform: rotate(40deg);
+    -o-transform: rotate(40deg);
+    -ms-transform: rotate(40deg);
+    transform: rotate(40deg);
+}
+
+.points {
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    font-size: 2.5em;
+    font-weight: 600;
+    color: rgb(12, 3, 139);
+    text-shadow: rgb(250, 250, 250);
+}
+
+a {
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 16px;
+    margin-left: 1em;
+    font-weight: 600;
+}
+
+a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.previous {
+    background-color: #f1f1f1;
+    color: black;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    /* Remove scrollbar space */
+    background: transparent;
+    /* Optional: just make scrollbar invisible */
+}
+
+.search {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.teambutton {
+    display: inline-block;
+}
+
+.fixturequali {
+    background-image: url('../../../../assets/1Vs1.jpg');
+    height: 4em;
+    width: 70%;
+    background-size: 40% 100%;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    margin-top: 2em;
+    box-shadow: inset -800px 0 50px 0px rgb(32, 68, 167);
+}
+
+//32, 68, 167
+.fixturequater {
+    background-image: url('../../../../assets/1Vs1.jpg');
+    height: 4em;
+    width: 70%;
+    background-size: 40% 100%;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    margin-top: 2em;
+    box-shadow: inset -800px 0 50px 0px rgb(172, 154, 0);
+}
+
+.fixturesemi {
+    background-image: url('../../../../assets/1Vs1.jpg');
+    height: 4em;
+    width: 70%;
+    background-size: 40% 100%;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    margin-top: 2em;
+    box-shadow: inset -800px 0 50px 0px rgb(192, 103, 2);
+}
+
+.fixturefinal {
+    background-image: url('../../../../assets/1Vs1.jpg');
+    height: 4em;
+    width: 70%;
+    background-size: 40% 100%;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    margin-top: 2em;
+    box-shadow: inset -800px 0 50px 0px rgb(192, 2, 2);
+}
+
+.Left1 {
+    width: 60%;
+    float: left;
+}
+
+.Right1 {
+    width: 40%;
+    float: right;
+}
+
+.fixturdetails {
+    font-weight: 800;
+    color: rgb(250, 250, 250);
+    padding-top: 2%;
+    padding-bottom: 2%;
+    font-size: 1.3em;
+    padding-left: 20%;
+    font-style: italic;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.fixtureTitle {
+    padding-left: 40%;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    font-size: 2em;
+    font-weight: 700;
+    color: rgb(255, 255, 255);
+    text-shadow: 2px 2px #000000;
+}
+
+.mystyle {
+    background-color: rgb(3, 3, 148);
+    color: white;
+}
+
+.col-md-4 {
+    color: rgb(3, 3, 148);
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.col-md-8 {
+    font-size: 1.2em;
+}

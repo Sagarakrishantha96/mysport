@@ -1,0 +1,97 @@
+<div id="login-page">
+    <div class="form">
+    <form [formGroup]="AdminRegistration" (ngSubmit)="adminSubmit()">
+        <h3>Enter your details</h3><br>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="firstNameAdmin">First Name</label>
+                <input [class.is-invalid]="firstNameAdmin.invalid && firstNameAdmin.touched"
+                    formControlName="firstNameAdmin" type="text" class="form-control form-control-lg"
+                    id="firstNameAdmin" placeholder="First name">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="secondNameAdmin">Last Name</label>
+                <input [class.is-invalid]="lastNameAdmin.invalid && lastNameAdmin.touched"
+                    formControlName="lastNameAdmin" type="text" class="form-control form-control-lg"
+                    id="secondNameAdmin" placeholder="Last name">
+            </div>
+
+            <div
+                *ngIf="(firstNameAdmin.touched && firstNameAdmin.invalid) || lastNameAdmin.invalid && lastNameAdmin.touched">
+                <small class="text-danger">First name and last name reuired and must contain more than 3
+                    charactors<br></small>
+            </div>
+        </div><br>
+
+
+        <div class="form-group">
+            <label for="curAddressAdmin">Current Address</label>
+            <input
+                [class.is-invalid]="AdminRegistration.get('addressAdmin').invalid && AdminRegistration.get('addressAdmin').touched"
+                formControlName="addressAdmin" type="text" class="form-control form-control-lg" id="curAddressAdmin"
+                required placeholder="1234 Main St">
+
+            <small
+                [class.d-none]="AdminRegistration.get('addressAdmin').valid || AdminRegistration.get('addressAdmin').untouched"
+                class="text-danger">Address is required</small>
+        </div><br>
+
+
+        <div class="form-group">
+            <label for="teleNoAdmin">Telephone Number</label>
+            <input [class.is-invalid]="teleNoAdmin.invalid && teleNoAdmin.touched" formControlName="teleNoAdmin"
+                type="tel" class="form-control form-control-lg" id="teleNoAdmin" placeholder="+94 71 2345678">
+
+            <div *ngIf="teleNoAdmin.invalid && teleNoAdmin.touched">
+                <small *ngIf="teleNoAdmin.errors?.required" class="text-danger">Telephone number required</small>
+                <small *ngIf="teleNoAdmin.errors?.pattern" class="text-danger">Invalid telephone number</small>
+            </div>
+        </div><br>
+
+        <div class="form-check form-check-inline">
+            <input formControlName="genderAdmin" class="form-check-input" type="radio" name="genderAdmin" id="maleAdmin"
+                value="male" required>
+            <label class="form-check-label" for="maleAdmin">Male</label>
+        </div>&nbsp;
+        <div class="form-check form-check-inline">
+            <input formControlName="genderAdmin" class="form-check-input" type="radio" name="genderAdmin"
+                id="femaleAdmin" value="female" required>
+            <label class="form-check-label" for="femaleAdmin">female</label>
+        </div><br>
+        <br>
+
+    <p>====================================================</p>
+        
+        <h3>Institute Details</h3><br>
+
+        <div class="form-group">
+            <label for="InstituteName">Institute Name</label>
+            <input
+                [class.is-invalid]="AdminRegistration.get('InstituteName').invalid && AdminRegistration.get('InstituteName').touched"
+                formControlName="InstituteName" type="text" class="form-control form-control-lg" id="InstituteName"
+                required placeholder="ABC">
+
+            <small
+                [class.d-none]="AdminRegistration.get('InstituteName').valid || AdminRegistration.get('InstituteName').untouched"
+                class="text-danger">Institute Name is required</small>
+        </div><br>
+
+        <div class="form-group">
+            <label for="InstituteAddress">Institute Address</label>
+            <input
+                [class.is-invalid]="AdminRegistration.get('InstituteAddress').invalid && AdminRegistration.get('InstituteAddress').touched"
+                formControlName="InstituteAddress" type="text" class="form-control form-control-lg" id="InstituteAddress"
+                required placeholder="1234 Main St">
+
+            <small
+                [class.d-none]="AdminRegistration.get('InstituteAddress').valid || AdminRegistration.get('InstituteAddress').untouched"
+                class="text-danger">Address is required</small>
+        </div><br>
+
+        <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
+        <button [disabled]="AdminRegistration.invalid" type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+</div>
+</div>
